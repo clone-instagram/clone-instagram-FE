@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://localhost:3003",
   header: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -12,7 +12,7 @@ const instance = axios.create({
 
 // baseURL
 export const baseURL = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://localhost:3003",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",

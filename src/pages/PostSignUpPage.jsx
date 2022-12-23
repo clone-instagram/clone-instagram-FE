@@ -4,7 +4,7 @@ import { __checkUserName, __postSignup } from "../redux/modules/loginSlice";
 import { useInput } from "../lib/utils/useInput";
 // import { __postSignup } from "../redux/modules/loginSlice";
 
-const SignUp = () => {
+const PostSignUpPage = () => {
   const [username, setUserName] = useInput();
   const [password, setPassword] = useInput();
   const [checkPassword, setCheckPassword] = useInput();
@@ -190,4 +190,4 @@ const StButton = styled.button`
     `}
 `;
 
-export default SignUp;
+export default PostSignUpPage;
