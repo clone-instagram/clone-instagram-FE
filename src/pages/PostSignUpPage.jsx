@@ -1,48 +1,123 @@
 import { useNavigate } from "react-router-dom";
-import styled, { css } from "styled-components";
-import { __checkUserName, __postSignup } from "../redux/modules/loginSlice";
+import styled from "styled-components";
+import { __postLogin } from "../redux/modules/loginSlice";
 import { useInput } from "../lib/utils/useInput";
-// import { __postSignup } from "../redux/modules/loginSlice";
 
-const PostSignUpPage = () => {
+// import insta from "../assets/images/instaImage.png";
+import logo from "../assets/images/instaLogo.png";
+import line from "../assets/images/loginLine.png";
+
+const PostLoginPage = () => {
+  const url1 =
+    "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
+  const url2 =
+    "ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko";
+
+  const [email, setEmail] = useInput();
   const [username, setUserName] = useInput();
   const [password, setPassword] = useInput();
-  const [checkPassword, setCheckPassword] = useInput();
 
   const navigate = useNavigate();
-
-  const onSubmitSignup = (e) => {
+  // 로그인 관련
+  const onSubmitLogin = (e) => {
     e.preventDefault();
-    __postSignup({
+    __postLogin({
       username,
       password,
-      checkPassword,
     })
       .then((res) => {
-        console.log("signup res: ", res);
+        console.log("res: ", res);
         if (res.data.statusCode === 200) {
-          alert(res.data.msg);
+          alert("로그인 성공");
         }
-        // localStorage.setItem("id", res.headers.authorization);
+        localStorage.setItem("id", res.headers.authorization);
         navigate("/login");
       })
-      .catch((err) => {
-        // console.log("error: ", err);
-      });
-  };
-
-  // id 중복 체크 확인
-  const onCheckUserName = (username) => {
-    console.log("username---->", username);
-    __checkUserName(username).then((res) => {
-      console.log(res);
-    });
+      .catch((error) => alert("ID 또는 비밀번호가 틀립니다!"));
+    // .catch((error) => alert(error.response.data.msg));
   };
 
   return (
-    <StForm onSubmit={onSubmitSignup}>
+    <StContainer onSubmit={onSubmitLogin}>
       <div>
-        <h1>회원가입</h1>
+        <StRightBox1>
+          <StRightBox2>
+            <img src={logo} alt="" />
+
+            <StH>
+              친구들의 사진과 동영상을 보려면<br></br>가입하세요.
+            </StH>
+            <StButton>KaKao로 로그인</StButton>
+            <div>
+              <img src={line} alt="" />
+            </div>
+            <StInput
+              type="text"
+              id="email"
+              value={email}
+              onChange={setEmail}
+              placeholder="휴대폰 번호 또는 이메일 주소"
+              required
+              minLength={4}
+              maxLength={10}
+            />
+            <StInput
+              type="username"
+              id="username"
+              value={username}
+              onChange={setUserName}
+              placeholder="사용자 이름"
+              required
+              minLength={4}
+              maxLength={10}
+            />
+            <StInput
+              type="password"
+              id="password"
+              value={password}
+              onChange={setPassword}
+              placeholder="비밀번호"
+              required
+              minLength={8}
+              maxLength={15}
+            />
+            <StP>
+              저희 서비스를 이용하는 사람이 회원님의 연락처<br></br>정보를
+              Instagram에 업로드 했을 수도 있습니다.<br></br>
+              <a href="https://www.facebook.com/help/instagram/261704639352628?hl=ko">
+                더 알아보기
+              </a>
+            </StP>
+            <StButton>가입</StButton>
+          </StRightBox2>
+          <StRightBox3>
+            <div>
+              계정이 있으신가요? &nbsp;
+              <a href="https://www.instagram.com/accounts/emailsignup/?hl=ko">
+                로그인
+              </a>
+            </div>
+          </StRightBox3>
+          <br></br>
+          앱을 다운로드하세요.
+          <br></br>
+          <br></br>
+          <div>
+            <StImgButton
+              onClick={() => {
+                window.open(url1);
+              }}
+            />
+            <StImgButtons
+              onClick={() => {
+                window.open(url2);
+              }}
+            />
+          </div>
+        </StRightBox1>
+      </div>
+      {/* <div>
+        <h1>로그인</h1>
         <StDiv inputbox>
           <StLabel htmlFor="username">ID</StLabel>
           <StInput
@@ -51,21 +126,9 @@ const PostSignUpPage = () => {
             value={username}
             onChange={setUserName}
             required
-            minLength={4}
+            minLength={5}
             maxLength={10}
           />
-          <StDiv checkid>
-            <StButton
-              checkbtn
-              onClick={() => {
-                onCheckUserName(username);
-              }}
-              type="button"
-            >
-              중복확인
-            </StButton>
-            <StP>ID 중복체크를 해주세요</StP>
-          </StDiv>
           <StLabel htmlFor="password">PW</StLabel>
           <StInput
             type="password"
@@ -76,118 +139,145 @@ const PostSignUpPage = () => {
             minLength={8}
             maxLength={15}
           />
-          <StLabel htmlFor="checkpassword">CHECK PW</StLabel>
-          <StInput
-            type="password"
-            id="checkpw"
-            value={checkPassword}
-            onChange={setCheckPassword}
-            required
-            minLength={8}
-            maxLength={15}
-          />
         </StDiv>
       </div>
       <StDiv btns>
-        <StButton log>가입하기</StButton>
-        <StButton reg onClick={() => navigate("/login")}>
-          로그인
-        </StButton>
-      </StDiv>
-    </StForm>
+        <Stbutton log>로그인</Stbutton>
+        <Stbutton reg onClick={() => navigate("/signup")}>
+          회원가입
+        </Stbutton>
+      </StDiv> */}
+    </StContainer>
   );
 };
 
-const StForm = styled.form`
-  width: 300px;
-  height: 450px;
-  padding: 30px;
+export default PostLoginPage;
+
+const StContainer = styled.div`
+  width: 100%;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
+  background-color: #fafafa;
   align-items: center;
   justify-content: center;
-  margin-top: -150px;
-  /* border: 3px solid burlywood; */
-  border-radius: 10px;
-`;
-const StDiv = styled.div`
-  ${(props) =>
-    props.inputbox &&
-    css`
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 50px;
-    `}
-  ${(props) =>
-    props.btns &&
-    css`
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    `}
-    ${(props) =>
-    props.checkid &&
-    css`
-      display: flex;
-      margin-bottom: 10px;
-    `}
+  background-size: cover;
 `;
 
-const StP = styled.p`
-  margin: 0;
+const StRightBox1 = styled.div`
+  width: 400px;
+  height: 950px;
+  align-items: center;
+  border: 0;
+  border-radius: 1px;
+  box-sizing: border-box;
+  display: flex;
+  float: right;
+  flex-direction: column;
+  flex-shrink: 0;
+
+  font-size: 100%;
+  padding: 30px 0px;
+  /* position: relative; */
+  /* vertical-align: baseline; */
 `;
 
-const StLabel = styled.label`
-  font-size: 20px;
+const StRightBox2 = styled.div`
+  background-color: white;
+  width: 350px;
+  height: 550px;
+  align-items: center;
+  border: 1px solid #dbdbdb;
+  border-radius: 1px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  font-size: 100%;
+  margin: 5px 0 0px;
+  padding: 30px 0px;
+  /* position: relative; */
+  vertical-align: baseline;
+`;
+const StRightBox3 = styled.div`
+  width: 350px;
+  height: 70px;
+  align-items: center;
+
+  border: 1px solid #dbdbdb;
+
+  box-sizing: border-box;
+  display: flex;
+  margin-top: 10px;
+  flex-direction: column;
+  flex-shrink: 0;
+  font-size: 100%;
+  padding: 23px 0px;
+  /* position: relative; */
+  vertical-align: baseline;
 `;
 
 const StInput = styled.input`
-  width: 250px;
+  width: 268px;
   height: 35px;
-  border: 0;
-  border-bottom: 1px solid burlywood;
-  background-color: transparent;
-  color: burlywood;
-  margin: 15px;
+  background-color: #fafafa;
+  border: 0.5px solid #b2b3b2;
+  border-radius: 3px;
   padding-left: 10px;
-  &:focus {
-    outline: none;
-  }
+  margin-top: 5px;
+  font-size: 12px;
+
+  /* &:hover {
+    border: 0.5px solid black;
+  } */
+`;
+
+const StImgButton = styled.button`
+  width: 150px;
+  height: 45px;
+  border: 0px;
+  background-image: url("https://static.cdninstagram.com/rsrc.php/v3/ye/r/UtJtFmFLCiD.png");
+  background-size: cover;
+  cursor: pointer;
+`;
+
+const StImgButtons = styled.button`
+  width: 130px;
+  height: 45px;
+  border: 0px;
+  background-image: url("https://static.cdninstagram.com/rsrc.php/v3/yw/r/LBxTdceDfgS.png");
+  background-size: cover;
+  margin-left: 10px;
+  cursor: pointer;
 `;
 
 const StButton = styled.button`
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 280px;
+  height: 33px;
+  border: 0;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: #0095f6;
+  font-family: georgia;
+  color: white;
   cursor: pointer;
-  ${(props) =>
-    props.log &&
-    css`
-      width: 150px;
-      height: 40px;
-      border: 1px solid burlywood;
-      font-weight: bold;
-      color: #0a0327;
-      background-color: burlywood;
-    `}
-  ${(props) =>
-    props.reg &&
-    css`
-      width: 150px;
-      height: 40px;
-      border: 1px solid burlywood;
-      color: burlywood;
-      font-weight: bold;
-      background-color: transparent;
-    `}
-    ${(props) =>
-    props.checkbtn &&
-    css`
-      width: 70px;
-      height: 20px;
-      margin-right: 10px;
-      text-align: center;
-      color: #0a0327;
-      background-color: burlywood;
-      border: 0;
-    `}
+
+  &:hover {
+    background-color: #1877f2;
+  }
+  //   width: 100%;
+  //
+`;
+const StH = styled.h4`
+  color: #8e8e8e;
+  text-align: center;
+  font-weight: bold;
 `;
 
-export default PostSignUpPage;
+const StP = styled.p`
+  color: #989c98;
+  font-size: 12px;
+  text-align: center;
+`;

@@ -1,17 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { __postLogin } from "../redux/modules/loginSlice";
 import { useInput } from "../lib/utils/useInput";
 
 import insta from "../assets/images/instaImage.png";
 import logo from "../assets/images/instaLogo.png";
 import line from "../assets/images/loginLine.png";
-import googleplay from "../assets/images/googlePlay.png";
-import microsoft from "../assets/images/microSoft.png";
 
 const PostLoginPage = () => {
   const url1 =
-    "https://l.instagram.com/?u=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.instagram.android%26referrer%3Dutm_source%253Dinstagramweb%2526utm_campaign%253DloginPage%2526ig_mid%253D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%2526utm_content%253Dlo%2526utm_medium%253Dbadge%26hl%3Dko&e=AT00UlRQXf-NWLxVS3ahFTCNPno2nq1jw86E8PFCCwMeDMU8sr1URCCUNcDjh7lzJme4p3kE_4glBi4qBndsLCprk89wJGwPlCYH4wIOjdlxpcqL1m2D5QbuVRcxB68upXZkopSPLKsPYpqQFlUyJQ";
+    "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
   const url2 =
     "ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko";
 
@@ -141,6 +139,7 @@ const StContainer = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
+  background-color: #fafafa;
   align-items: center;
   justify-content: center;
   background-size: cover;
@@ -177,6 +176,7 @@ const StRightBox1 = styled.div`
 `;
 
 const StRightBox2 = styled.div`
+  background-color: white;
   width: 350px;
   height: 380px;
   align-items: center;
@@ -215,12 +215,13 @@ const StRightBox3 = styled.div`
 const StInput = styled.input`
   width: 268px;
   height: 38px;
+  background-color: #fafafa;
   border: 0.5px solid #b2b3b2;
   border-radius: 3px;
   padding-left: 10px;
   margin-top: 5px;
   font-size: 15px;
-  cursor: pointer;
+
   /* &:hover {
     border: 0.5px solid black;
   } */
