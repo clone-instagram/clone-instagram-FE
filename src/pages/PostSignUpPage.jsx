@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { __postLogin } from "../redux/modules/loginSlice";
 import { useInput } from "../lib/utils/useInput";
-
+import Button from "../components/button/Button";
 // import insta from "../assets/images/instaImage.png";
 import logo from "../assets/images/instaLogo.png";
 import line from "../assets/images/loginLine.png";
@@ -93,9 +93,9 @@ const PostLoginPage = () => {
           <StRightBox3>
             <div>
               계정이 있으신가요? &nbsp;
-              <a href="https://www.instagram.com/accounts/emailsignup/?hl=ko">
+              <StButtons reg onClick={() => navigate("/login")}>
                 로그인
-              </a>
+              </StButtons>
             </div>
           </StRightBox3>
           <br></br>
@@ -202,16 +202,15 @@ const StRightBox3 = styled.div`
   width: 350px;
   height: 70px;
   align-items: center;
-
+  background-color: white;
   border: 1px solid #dbdbdb;
-
   box-sizing: border-box;
   display: flex;
   margin-top: 10px;
   flex-direction: column;
   flex-shrink: 0;
   font-size: 100%;
-  padding: 23px 0px;
+  padding: 10px 0px;
   /* position: relative; */
   vertical-align: baseline;
 `;
@@ -280,4 +279,43 @@ const StP = styled.p`
   color: #989c98;
   font-size: 12px;
   text-align: center;
+`;
+
+const StButtons = styled.button`
+  cursor: pointer;
+  ${(props) =>
+    props.log &&
+    css`
+      margin: 15px 40px;
+      width: 280px;
+      height: 37px;
+      border: 0;
+      font-size: 17px;
+      font-weight: bold;
+      border-radius: 10px;
+      background-color: #0095f6;
+      font-family: georgia;
+      color: white;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #1877f2;
+      }
+    `}
+  ${(props) =>
+    props.reg &&
+    css`
+      width: 70px;
+      height: 40px;
+      border: 0px;
+      background-color: white;
+      color: #0095f6;
+      font-weight: bold;
+      font-size: 15px;
+      margin-top: 5px;
+      padding-right: 10px;
+      font-size: 15px;
+
+      cursor: pointer;
+    `}
 `;

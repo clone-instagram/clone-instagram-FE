@@ -44,32 +44,32 @@ export const apis = {
 
   createPost: (post) => {
     console.log("payload::", post);
-    baseURL.post("/post", post, {
+    baseURL.post("/posts", post, {
       headers: { "Content-Type": "multipart/form-data" },
     });
   },
   deletePost: (id) => baseURL.delete(`/post/${id}`),
   editPost: (id, post) =>
     // console.log("string", id, post);
-    baseURL.patch(`/post/${id}`, post, {
+    baseURL.patch(`/posts/${id}`, post, {
       headers: { "Content-Type": "multipart/form-data" },
     }),
 
-  topPost: () => baseURL.get("/tops"),
+  // topPost: () => baseURL.get("/tops"),
 
   // category,title,imageUrl,post.like
 
   // 리뷰 관련
-  getComment: (postId) => baseURL.get(`/post/${postId}`),
-  createComment: (postId, comment) => {
-    console.log("postId----->", postId);
-    baseURL.post(`/posts/${postId}/comment`, comment);
-  },
-  deleteComment: (postId, commendId) =>
-    baseURL.delete(`/posts/${postId}/comments/${commendId}`),
-  editComment: (postId, commendId, editComment) =>
-    baseURL.patch(`/posts/${postId}/comments/${commendId}`, editComment),
+  // getComment: (postId) => baseURL.get(`/post/${postId}`),
+  // createComment: (postId, comment) => {
+  //   console.log("postId----->", postId);
+  //   baseURL.post(`/posts/${postId}/comment`, comment);
+  // },
+  // deleteComment: (postId, commendId) =>
+  //   baseURL.delete(`/posts/${postId}/comments/${commendId}`),
+  // editComment: (postId, commendId, editComment) =>
+  //   baseURL.patch(`/posts/${postId}/comments/${commendId}`, editComment),
 
   // 좋아요 관련
-  likeToggle: (postId) => baseURL.post(`/post/${postId}/like`),
+  // likeToggle: (postId) => baseURL.post(`/post/${postId}/like`),
 };

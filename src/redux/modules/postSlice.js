@@ -29,23 +29,6 @@ export const __getPost = createAsyncThunk(
     }
   }
 );
-// top5 데이터 불러오기
-
-export const __topPost = createAsyncThunk(
-  "topPost",
-  async (payload, thunkAPI) => {
-    try {
-      const data = await apis.topPost();
-      console.log("payload: ", payload);
-      console.log("data: ", data.data);
-      return thunkAPI.fulfillWithValue(data.data);
-    } catch (err) {
-      console.log(err);
-
-      return thunkAPI.rejectWithValue(err);
-    }
-  }
-);
 
 // 해당 아이디 값 데이터 불러오기 (안먹힘....)
 export const __getIdPost = createAsyncThunk(
@@ -129,22 +112,6 @@ export const __editPost = createAsyncThunk(
   }
 );
 
-export const __likeToggle = createAsyncThunk(
-  "likeToggle",
-  async (payload, thunkAPI) => {
-    try {
-      const data = await apis.likeToggle(payload);
-      // const data = await axios.post("http://localhost:3002/recipes", payload);
-      console.log("payload: ", payload);
-      console.log("data: ", data.data);
-      return thunkAPI.fulfillWithValue(data.data);
-    } catch (err) {
-      console.log(err);
-      return thunkAPI.rejectWithValue(err);
-    }
-  }
-);
-
 // // id 중복체크
 // export const __checkUserName = createAsyncThunk(
 //   "checkUserName",
@@ -184,24 +151,6 @@ export const postSlice = createSlice({
       // catch 된 error 객체를 state.error에 넣습니다.
     },
 
-    // top5 데이터 가져오기
-
-    [__topPost.pending]: (state) => {
-      state.isLoading = true;
-      // 네트워크 요청 시작-> 로딩 true 변경합니다.
-    },
-    [__topPost.fulfilled]: (state, action) => {
-      // action으로 받아온 객체를 store에 있는 값에 넣어준다
-      state.isLoading = false;
-      state.posts = action.payload;
-    },
-    [__topPost.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-      // 에러 발생-> 네트워크 요청은 끝,false
-      // catch 된 error 객체를 state.error에 넣습니다.
-    },
-
     // 해당 id 리스트만 불러오기
     [__getIdPost.pending]: (state) => {
       state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
@@ -217,7 +166,7 @@ export const postSlice = createSlice({
       state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
     },
 
-    // 레시피 추가
+    // 게시글 추가
     [__addPost.pending]: (state) => {
       state.isLoading = true;
     },
@@ -248,7 +197,7 @@ export const postSlice = createSlice({
       state.error = action.payload;
     },
 
-    // 레시피 수정
+    // 게시글 수정
     [__editPost.pending]: (state) => {
       state.isLoading = true;
     },
@@ -274,21 +223,6 @@ export const postSlice = createSlice({
       // state.recipes.splice(index, 1, action.payload[1]);
     },
     [__editPost.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-
-    // 좋아요 토글
-    [__likeToggle.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__likeToggle.fulfilled]: (state, action) => {
-      // 액션으로 받은 값 = payload 추가해준다.
-      console.log("action: ", action.payload);
-      state.isLoading = false;
-      state.posts = action.payload;
-    },
-    [__likeToggle.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

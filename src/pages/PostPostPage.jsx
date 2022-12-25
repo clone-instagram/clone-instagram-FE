@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 // import { apis } from "../lib/axios";
-
+import Button from "../components/button/Button";
 import { useDispatch } from "react-redux";
 import { __addPost } from "../redux/modules/postSlice";
 
@@ -11,35 +11,33 @@ import { __addPost } from "../redux/modules/postSlice";
 const PostPostPage = () => {
   const navigate = useNavigate();
 
-  // // const [imageUrl, setImageUrl] = useState(null);
-  // const imgRef = useRef();
-  // // const [post, setPost] = useState();
-  // const dispatch = useDispatch();
+  // const [imageUrl, setImageUrl] = useState(null);
+  const imgRef = useRef();
+  // const [post, setPost] = useState();
+  const dispatch = useDispatch();
 
-  // const onChangeImage = (event) => {
-  //   const file = event.target.files[0];
-  //   setImageFile(file);
-  //   const reader = new FileReader();
-  //   // const file = imgRef.current.files[0];
-  //   console.log(file);
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = () => {
-  //     setImageUrl(reader.result);
-  //     // const image = reader.result;
-  //     setPost({
-  //       ...post,
+  const onChangeImage = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
+    const reader = new FileReader();
+    // const file = imgRef.current.files[0];
+    console.log(file);
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImageUrl(reader.result);
+      // const image = reader.result;
+      setPosts({
+        ...posts,
 
-  //       imageUrl: reader.result,
-  //     });
-  //   };
-  // };
+        imageUrl: reader.result,
+      });
+    };
+  };
   // // console.log(imageUrl);
-  // const [imagefile, setImageFile] = useState("");
-  // const [imageUrl, setImageUrl] = useState("");
-  // const [title, setTitle] = useState("");
-  // const [content, setContent] = useState("");
-  // const [category, setCategory] = useState("");
-  // const [post, setPost] = useState([]);
+  const [imagefile, setImageFile] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [content, setContent] = useState("");
+  const [posts, setPosts] = useState([]);
   // const setFile = (e) => {};
 
   // const setFileImage = (event) => {
@@ -76,43 +74,74 @@ const PostPostPage = () => {
   //     });
   // }, []);
 
-  // const onSubmitHandler = () => {
-  //   console.log(title, content, category);
-  //   const formdata = new FormData();
-  //   formdata.append("file", imagefile);
-  //   formdata.append("title", title.title);
-  //   formdata.append("content", content.content);
-  //   formdata.append("category", category.category);
-  //   console.log(formdata);
-  //   console.log(typeof formdata);
+  const onSubmitHandler = () => {
+    // console.log(content);
+    const formdata = new FormData();
+    formdata.append("file", imagefile);
+    formdata.append("content", content.content);
 
-  //   dispatch(__addPost(formdata));
+    console.log(formdata);
+    console.log(typeof formdata);
 
-  //   for (const pair of formdata) {
-  //     console.log(pair[0] + ", " + pair[1]);
-  //   }
-  // };
+    dispatch(__addPost(formdata));
+
+    for (const pair of formdata) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
+  };
   return (
     <StContainer>
-      <div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmitHandler(posts);
+          navigate("/");
+        }}
+      >
         <div>
           <StTopBar>
-            <StBackButton
+            <Button
+              back
               onClick={() => {
                 navigate("/main");
               }}
             />
             <StH>새 게시물 만들기</StH>
-            <StShareButton>공유하기</StShareButton>
+            <Button add>공유하기</Button>
           </StTopBar>
         </div>
-        <StLeftBox>이미지</StLeftBox>
+        <StLeftBox alt="" src={imageUrl ? imageUrl : ""}></StLeftBox>
         <StRightBox>
           <StUserBox>Username</StUserBox>
-          <StPostBox placeholder="문구 입력.."></StPostBox>
+          <StPostBox
+            placeholder="문구 입력.."
+            required
+            maxLength={200}
+            minLength={10}
+            name="content"
+            id="content"
+            cols="40"
+            rows="10"
+            onChange={(ev) => {
+              const { value } = ev.target;
+              setContent({
+                ...content,
+
+                content: value,
+              });
+            }}
+          ></StPostBox>
           <StImogeBox></StImogeBox>
+          <input
+            type="file"
+            ref={imgRef}
+            // onChange={onChangeImage}
+            onChange={onChangeImage}
+            width="850px"
+            height="850px"
+          ></input>
         </StRightBox>
-      </div>
+      </form>
     </StContainer>
   );
 };
@@ -128,7 +157,21 @@ const StContainer = styled.div`
   justify-content: center;
   background-size: cover;
 `;
-const StLeftBox = styled.div`
+
+// const StForm = styled.form`
+//   border-radius: 5px;
+//   max-width: 700px;
+//   border: 1px solid burlywood;
+//   width: 95%;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   min-height: 90vh;
+//   margin: -100px auto 0 auto;
+// `;
+
+const StLeftBox = styled.img`
   align-items: center;
   background: #c0e9fc;
   box-sizing: border-box;
@@ -137,6 +180,7 @@ const StLeftBox = styled.div`
   width: 855px;
   display: flex;
   border-bottom-left-radius: 15px;
+  border: transparent;
   /* align-items: center;
   width: 500px;
   height: 490px;
@@ -177,29 +221,28 @@ const StRightBox = styled.div`
   vertical-align: baseline;
 `;
 
-const StBackButton = styled.button`
-  width: 30px;
-  height: 30px;
-  border: 0px;
-  background-image: url("https://velog.velcdn.com/images/dnr0000/post/74060826-4b7c-4908-8e0e-59e8f39eee45/image.png");
-  background-size: cover;
-  margin-left: 15px;
+// const StBackButton = styled.button`
+//   width: 30px;
+//   height: 30px;
+//   border: 0px;
+//   background-image: url("https://velog.velcdn.com/images/dnr0000/post/74060826-4b7c-4908-8e0e-59e8f39eee45/image.png");
+//   background-size: cover;
+//   margin-left: 15px;
+//   cursor: pointer;
+// `;
 
-  cursor: pointer;
-`;
+// const StShareButton = styled.button`
+//   width: 80px;
+//   height: 40px;
+//   border: 0px;
+//   background-color: white;
+//   color: #0095f6;
+//   font-weight: bold;
+//   font-size: 15px;
+//   margin-right: 15px;
 
-const StShareButton = styled.button`
-  width: 80px;
-  height: 40px;
-  border: 0px;
-  background-color: white;
-  color: #0095f6;
-  font-weight: bold;
-  font-size: 15px;
-  margin-right: 15px;
-
-  cursor: pointer;
-`;
+//   cursor: pointer;
+// `;
 
 const StH = styled.h3`
   color: black;

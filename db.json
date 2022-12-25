@@ -13,7 +13,10 @@
       "postId": 1
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "login": [
+    {
+      "email": "typicode",
+      "password": "wjdtkd11@@"
+    }
+  ]
 }

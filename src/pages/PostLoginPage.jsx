@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { __postLogin } from "../redux/modules/loginSlice";
 import { useInput } from "../lib/utils/useInput";
-
+// import StButton from "../components/button/Button";
 import insta from "../assets/images/instaImage.png";
 import logo from "../assets/images/instaLogo.png";
 import line from "../assets/images/loginLine.png";
@@ -13,7 +13,7 @@ const PostLoginPage = () => {
   const url2 =
     "ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko";
 
-  const [username, setUserName] = useInput();
+  const [email, setEmail] = useInput();
   const [password, setPassword] = useInput();
 
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const PostLoginPage = () => {
   const onSubmitLogin = (e) => {
     e.preventDefault();
     __postLogin({
-      username,
+      email,
       password,
     })
       .then((res) => {
@@ -49,9 +49,9 @@ const PostLoginPage = () => {
 
             <StInput
               type="text"
-              id="username"
-              value={username}
-              onChange={setUserName}
+              id="email"
+              value={email}
+              onChange={setEmail}
               placeholder="전화번호,사용자 이름 또는 이메일"
               required
               minLength={4}
@@ -64,10 +64,10 @@ const PostLoginPage = () => {
               onChange={setPassword}
               placeholder="비밀번호"
               required
-              minLength={4}
-              maxLength={10}
+              minLength={8}
+              maxLength={15}
             />
-            <StButton>로그인</StButton>
+            <StButton log>로그인</StButton>
             <div>
               <img src={line} alt="" />
             </div>
@@ -75,9 +75,9 @@ const PostLoginPage = () => {
           <StRightBox3>
             <div>
               계정이 없으신가요?{" "}
-              <a href="https://www.instagram.com/accounts/emailsignup/?hl=ko">
+              <StButton reg onClick={() => navigate("/signup")}>
                 가입하기
-              </a>
+              </StButton>
             </div>
           </StRightBox3>
           <br></br>
@@ -198,16 +198,15 @@ const StRightBox3 = styled.div`
   width: 350px;
   height: 70px;
   align-items: center;
-
+  background-color: white;
   border: 1px solid #dbdbdb;
-
   box-sizing: border-box;
   display: flex;
   margin-top: 10px;
   flex-direction: column;
   flex-shrink: 0;
   font-size: 100%;
-  padding: 23px 0px;
+  padding: 10px 0px;
   /* position: relative; */
   vertical-align: baseline;
 `;
@@ -216,7 +215,7 @@ const StInput = styled.input`
   width: 268px;
   height: 38px;
   background-color: #fafafa;
-  border: 0.5px solid #b2b3b2;
+  border: 0.5px solid #dbdbdb;
   border-radius: 3px;
   padding-left: 10px;
   margin-top: 5px;
@@ -247,22 +246,59 @@ const StImgButtons = styled.button`
   cursor: pointer;
 `;
 
-const StButton = styled.button`
-  margin: 15px 40px;
-  width: 280px;
-  height: 37px;
-  border: 0;
-  font-size: 17px;
-  font-weight: bold;
-  border-radius: 10px;
-  background-color: #0095f6;
-  font-family: georgia;
-  color: white;
-  cursor: pointer;
+// const StButton = styled.button`
+//   margin: 15px 40px;
+//   width: 280px;
+//   height: 37px;
+//   border: 0;
+//   font-size: 17px;
+//   font-weight: bold;
+//   border-radius: 10px;
+//   background-color: #0095f6;
+//   font-family: georgia;
+//   color: white;
+//   cursor: pointer;
 
-  &:hover {
-    background-color: #1877f2;
-  }
-  //   width: 100%;
-  //
+//   &:hover {
+//     background-color: #1877f2;
+//   }
+
+// `;
+
+const StButton = styled.button`
+  cursor: pointer;
+  ${(props) =>
+    props.log &&
+    css`
+      margin: 15px 40px;
+      width: 280px;
+      height: 37px;
+      border: 0;
+      font-size: 17px;
+      font-weight: bold;
+      border-radius: 10px;
+      background-color: #0095f6;
+      font-family: georgia;
+      color: white;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #1877f2;
+      }
+    `}
+  ${(props) =>
+    props.reg &&
+    css`
+      width: 80px;
+      height: 40px;
+      border: 0px;
+      background-color: white;
+      color: #0095f6;
+      font-weight: bold;
+      font-size: 15px;
+      margin-top: 5px;
+      padding-right: 10px;
+      font-size: 15px;
+      cursor: pointer;
+    `}
 `;
