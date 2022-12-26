@@ -1,9 +1,10 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 
-import postReducer from '../modules/postSlice';
+import commentReducer from '../modules/postSlice';
+import post from '../modules/postSlice';
 
 const store = configureStore({
-  reducer: { postReducer },
+  reducer: { commentReducer, post },
   middleware: getDefaultMiddleware({
     serializableCheck: false,
   }),

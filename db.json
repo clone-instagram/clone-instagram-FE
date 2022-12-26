@@ -1,0 +1,25 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "content": "typicode"
+    },
+    {
+      "id": 2
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "login": [
+    {
+      "email": "typicode",
+      "password": "wjdtkd11@@"
+    }
+  ]
+}
