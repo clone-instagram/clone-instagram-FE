@@ -1,14 +1,23 @@
+import { Link } from 'react-router-dom';
+
 import { IconsStyle } from '../styles/IconsStyle';
 
-export default function Icons() {
+import like from '.././assets/outline-icons/like.svg';
+import comment from '.././assets/outline-icons/comment.svg';
+import share from '.././assets/outline-icons/share.svg';
+import bookmark from '.././assets/outline-icons/bookmark.svg';
+
+export default function Icons({ postId, color }) {
   return (
-    <IconsStyle>
+    <IconsStyle color={color}>
       <div>
-        <span>좋아요</span>
-        <span>댓글</span>
-        <span>공유</span>
+        <button type="button"><img src={like} /></button>
+        <Link to={`/comment/${postId}`}><img src={comment} /></Link>
+        <Link to="#"><img src={share} /></Link>
       </div>
-      <span>북마크</span>
-    </IconsStyle>
+      <div>
+        <Link to="#"><img src={bookmark} /></Link>
+      </div>
+    </IconsStyle >
   );
 }

@@ -7,6 +7,11 @@ import { TopNavBarStyle } from '.././styles/TopNavBarStyle';
 import { removeItem } from '../services/storage';
 
 import logo from '../assets/logo.png';
+import home from '../assets/solid-icons/home.svg';
+import share from '../assets/outline-icons/share.svg';
+import add from '../assets/outline-icons/add.svg';
+import like from '../assets/outline-icons/like.svg';
+import more from '../assets/outline-icons/more.svg';
 
 export default function TopNavBar() {
   // const dispatch = useDispatch();
@@ -14,12 +19,12 @@ export default function TopNavBar() {
 
   // const handleClickBack = () => {
   //   dispatch(clearAll());
-  //   history.back();
+  //   window.history.back();
   // };
 
   const handleClickLogout = () => {
     removeItem(status);
-    location.reload();
+    window.location.reload();
   };
 
   return (
@@ -34,10 +39,11 @@ export default function TopNavBar() {
           </input>
         </div>
         <div className="icons">
-          <Link onClick={() => location.assign('/')}>홈</Link>
-          <Link to="#">공유</Link>
-          <Link to="#">글작성</Link>
-          <Link onClick={() => handleClickLogout()}>로그아웃</Link>
+          <Link onClick={() => location.assign('/')}><img src={home} /></Link>
+          <Link to="#"><img src={share} /></Link>
+          <Link to="#"><img src={add} /></Link>
+          <Link to="#"><img src={like} /></Link>
+          <Link onClick={() => handleClickLogout()}><img src={more} /></Link>
         </div>
       </div>
     </TopNavBarStyle >

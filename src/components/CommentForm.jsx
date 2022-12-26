@@ -1,12 +1,14 @@
 import { CommentFormStyle } from '../styles/CommentFormStyle';
 
+import smile from '.././assets/outline-icons/smile.svg';
+
 export default function CommentForm({
   postId, inputField, onChangeInputField, onClickPostComment
 }) {
   return (
     <CommentFormStyle>
       <div>
-        <label htmlFor="content">웃는아이콘</label>
+        <img src={smile} />
         <input
           type="text"
           id="content"
