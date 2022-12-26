@@ -1,19 +1,19 @@
-import { useNavigate } from "react-router-dom";
-import styled, { css } from "styled-components";
-import { __postSignup } from "../redux/modules/loginSlice";
-import { useInput } from "../lib/utils/useInput";
+import { useNavigate } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import { __postSignup } from '../redux/modules/loginSlice';
+import { useInput } from '../lib/utils/useInput';
 // import Button from "../components/button/Button";
 // import insta from "../assets/images/instaImage.png";
-import logo from "../assets/images/instaLogo.png";
-import line from "../assets/images/loginLine.png";
-import { useDispatch } from "react-redux";
-import { apis } from "../lib/axios";
+import logo from '../assets/images/instaLogo.png';
+import line from '../assets/images/loginLine.png';
+import { useDispatch } from 'react-redux';
+import { apis } from '../lib/axios';
 
 const PostSignUpPage = () => {
   const url1 =
-    "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
+    'https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko';
   const url2 =
-    "ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko";
+    'ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko';
 
   const [email, setEmail] = useInput();
   const [username, setUserName] = useInput();
@@ -29,12 +29,12 @@ const PostSignUpPage = () => {
     apis
       .postSignup({ email, username, password })
       .then((res) => {
-        console.log("signup res: ", res);
+        console.log('signup res: ', res);
         if (res.data.statusCode === 200) {
           alert(res.data.msg);
         }
         // localStorage.setItem("id", res.headers.authorization);
-        navigate("/login");
+        navigate('/login');
       })
       .catch((err) => {
         //console.log(err)
@@ -105,7 +105,7 @@ const PostSignUpPage = () => {
           <StRightBox3>
             <div>
               계정이 있으신가요? &nbsp;
-              <StButtons reg onClick={() => navigate("/login")}>
+              <StButtons reg onClick={() => navigate('/login')}>
                 로그인
               </StButtons>
             </div>

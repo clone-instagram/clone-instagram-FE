@@ -1,10 +1,10 @@
-import React, { useState, useRef } from "react";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useRef } from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 // import { apis } from "../lib/axios";
-import Button from "../components/button/Button";
-import { useDispatch } from "react-redux";
-import { __addPost } from "../redux/modules/postSlice";
+import Button from '../components/button/Button';
+import { useDispatch } from 'react-redux';
+import { __addPost } from '../redux/modules/postSlice';
 
 // import axios from "axios";
 
@@ -34,9 +34,9 @@ const PostPostPage = () => {
     };
   };
   // // console.log(imageUrl);
-  const [imagefile, setImageFile] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [content, setContent] = useState("");
+  const [imagefile, setImageFile] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [content, setContent] = useState('');
   const [posts, setPosts] = useState([]);
   // const setFile = (e) => {};
 
@@ -77,8 +77,8 @@ const PostPostPage = () => {
   const onSubmitHandler = () => {
     // console.log(content);
     const formdata = new FormData();
-    formdata.append("file", imagefile);
-    formdata.append("content", content.content);
+    formdata.append('file', imagefile);
+    formdata.append('content', content.content);
 
     console.log(formdata);
     console.log(typeof formdata);
@@ -86,7 +86,7 @@ const PostPostPage = () => {
     dispatch(__addPost(formdata));
 
     for (const pair of formdata) {
-      console.log(pair[0] + ", " + pair[1]);
+      console.log(pair[0] + ', ' + pair[1]);
     }
   };
   return (
@@ -95,7 +95,7 @@ const PostPostPage = () => {
         onSubmit={(e) => {
           e.preventDefault();
           onSubmitHandler(posts);
-          navigate("/");
+          navigate('/');
         }}
       >
         <div>
@@ -103,14 +103,14 @@ const PostPostPage = () => {
             <Button
               back
               onClick={() => {
-                navigate("/main");
+                navigate('/main');
               }}
             />
             <StH>새 게시물 만들기</StH>
             <Button add>공유하기</Button>
           </StTopBar>
         </div>
-        <StLeftBox alt="" src={imageUrl ? imageUrl : ""}></StLeftBox>
+        <StLeftBox alt="" src={imageUrl ? imageUrl : ''}></StLeftBox>
         <StRightBox>
           <StUserBox>Username</StUserBox>
           <StPostBox
