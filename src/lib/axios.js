@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
-  baseURL: "http://13.125.118.137/api",
+  baseURL: "http://52.79.64.171/api",
   header: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -12,7 +12,7 @@ const instance = axios.create({
 
 // baseURL
 export const baseURL = axios.create({
-  baseURL: "http://13.125.118.137/api",
+  baseURL: "http://52.79.64.171/api",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",

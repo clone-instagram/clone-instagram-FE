@@ -23,19 +23,15 @@ const PostLoginPage = () => {
     __postLogin({
       email,
       password,
-    })
-      .then((res) => {
-        console.log("res: ", res);
-        if (res.data.statusCode === 200) {
-          alert("로그인 성공");
-        }
-        localStorage.setItem("id", res.headers.authorization);
-        navigate("/main");
-      })
-      .catch((error) => alert("ID 또는 비밀번호가 틀립니다!"));
-    // .catch((error) => alert(error.response.data.msg));
+    }).then((res) => {
+      if (res.statusCode === 200) {
+        alert(res.statusMsg);
+      }
+      localStorage.setItem("id", res.headers.authorization);
+      localStorage.setItem("username", res.headers.authorization);
+      navigate("/main");
+    });
   };
-
   return (
     <StContainer onSubmit={onSubmitLogin}>
       <div>
@@ -132,9 +128,6 @@ const PostLoginPage = () => {
     </StContainer>
   );
 };
-
-export default PostLoginPage;
-
 const StContainer = styled.form`
   width: 100%;
   height: 100vh;
@@ -302,3 +295,4 @@ const StButton = styled.button`
       cursor: pointer;
     `}
 `;
+export default PostLoginPage;

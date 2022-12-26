@@ -18,27 +18,40 @@ const PostSignUpPage = () => {
   const [email, setEmail] = useInput();
   const [username, setUserName] = useInput();
   const [password, setPassword] = useInput();
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
   // 로그인 관련
+  // const onSubmitSignup = (e) => {
+  //   e.preventDefault();
+  //   // dispatch(__postSignup({ email, username, password }))
+  //   apis.postSignup({ email, username, password }).then((res) => {
+  //     // if (res.statusCode === 200) {
+  //     //   alert(res.statusMsg);
+  //     // }
+
+  //     navigate("/main");
+  //   });
+  // };
+
   const onSubmitSignup = (e) => {
-    // alert(123);
     e.preventDefault();
-    // dispatch(__postSignup({ email, username, password }))
-    apis
-      .postSignup({ email, username, password })
-      .then((res) => {
-        console.log("signup res: ", res);
-        if (res.data.statusCode === 200) {
-          alert(res.data.msg);
-        }
-        // localStorage.setItem("id", res.headers.authorization);
-        navigate("/login");
-      })
-      .catch((err) => {
-        //console.log(err)
-      });
+    __postSignup({
+      email,
+      username,
+      password,
+    }).then((res) => {
+      console.log("signup res: ", res);
+      // if (res.data.statusCode === 200) {
+      //   alert(res.data.msg);
+      // }
+      // localStorage.setItem("id", res.headers.authorization);
+      navigate("/login");
+    });
+    // .catch((err) => {
+    //   // console.log("error: ", err);
+    // });
   };
 
   // id 중복 체크 확인

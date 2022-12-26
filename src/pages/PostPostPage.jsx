@@ -1,15 +1,19 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-// import { apis } from "../lib/axios";
+import { apis } from "../lib/axios";
 import Button from "../components/button/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { __addPost } from "../redux/modules/postSlice";
-
+import white from "../assets/images/white.png";
 // import axios from "axios";
 
 const PostPostPage = () => {
   const navigate = useNavigate();
+
+  const post = useSelector((state) => state.post);
+
+  console.log("posts???", post);
 
   // const [imageUrl, setImageUrl] = useState(null);
   const imgRef = useRef();
@@ -38,6 +42,7 @@ const PostPostPage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [content, setContent] = useState("");
   const [posts, setPosts] = useState([]);
+  const [username, setUsername] = useState("");
   // const setFile = (e) => {};
 
   // const setFileImage = (event) => {
@@ -62,17 +67,18 @@ const PostPostPage = () => {
   //   category: "",
   // });
 
-  // useEffect(() => {
-  //   apis
-  //     .getPost()
-  //     .then((res) => {
-  //       const get = res.data;
-  //       setPost(get);
-  //     })
-  //     .catch((err) => {
-  //       // console.log(err);
-  //     });
-  // }, []);
+  useEffect(() => {
+    apis
+      .getPost()
+      .then((res) => {
+        const get = res.data;
+        console.log("res::", res);
+        setUsername(get);
+      })
+      .catch((err) => {
+        // console.log(err);
+      });
+  }, []);
 
   const onSubmitHandler = () => {
     // console.log(content);
@@ -95,7 +101,7 @@ const PostPostPage = () => {
         onSubmit={(e) => {
           e.preventDefault();
           onSubmitHandler(posts);
-          navigate("/");
+          navigate("/main");
         }}
       >
         <div>
@@ -110,9 +116,11 @@ const PostPostPage = () => {
             <Button add>공유하기</Button>
           </StTopBar>
         </div>
-        <StLeftBox alt="" src={imageUrl ? imageUrl : ""}></StLeftBox>
+        <StLeftBox alt="" src={imageUrl ? imageUrl : white}></StLeftBox>
         <StRightBox>
-          <StUserBox>Username</StUserBox>
+          <StUserBox>
+            <p>{post.username}</p>
+          </StUserBox>
           <StPostBox
             placeholder="문구 입력.."
             required
@@ -179,6 +187,7 @@ const StLeftBox = styled.img`
   height: 855px;
   width: 855px;
   display: flex;
+  border-right: 1px solid #dbdbdb;
   border-bottom-left-radius: 15px;
   border: transparent;
   /* align-items: center;
@@ -259,12 +268,14 @@ const StUserBox = styled.div`
   height: 60px;
   display: flex;
   align-items: center;
+  padding-left: 10px;
 `;
 
 const StImogeBox = styled.div`
   width: 339px;
   height: 40px;
   border-bottom: 1px solid #dbdbdb;
+  border-top: 1px solid #dbdbdb;
 `;
 
 const StPostBox = styled.textarea`
@@ -276,6 +287,7 @@ const StPostBox = styled.textarea`
   font-family: Arial;
   padding-left: 16px;
   padding-right: 16px;
+
   &::-webkit-scrollbar {
     display: none;
   }

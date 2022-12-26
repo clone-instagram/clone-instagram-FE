@@ -1,12 +1,12 @@
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import { TopNavBarStyle } from '.././styles/TopNavBarStyle';
+import { TopNavBarStyle } from ".././styles/TopNavBarStyle";
 
-import { removeItem } from '../services/storage';
+import { removeItem } from "../services/storage";
 
-import logo from '../assets/logo.png';
+import logo from "../assets/logo.png";
 
 export default function TopNavBar() {
   // const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export default function TopNavBar() {
 
   const handleClickLogout = () => {
     removeItem(status);
-    location.reload();
+    window.location.reload();
   };
 
   return (
@@ -27,19 +27,18 @@ export default function TopNavBar() {
       <div>
         {/*toAsk 아래와 같이 img태그에 onClick핸들러 넣어서 해도 되는지?*/}
         <div className="logo">
-          <img src={logo} onClick={() => location.assign('/')} />
+          <img src={logo} onClick={() => window.location.assign("/")} />
         </div>
         <div className="search">
-          <input type="text" placeholder="🔍 검색">
-          </input>
+          <input type="text" placeholder="🔍 검색"></input>
         </div>
         <div className="icons">
-          <Link onClick={() => location.assign('/')}>홈</Link>
+          <Link onClick={() => window.location.assign("/")}>홈</Link>
           <Link to="#">공유</Link>
           <Link to="#">글작성</Link>
           <Link onClick={() => handleClickLogout()}>로그아웃</Link>
         </div>
       </div>
-    </TopNavBarStyle >
+    </TopNavBarStyle>
   );
 }
