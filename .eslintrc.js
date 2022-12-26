@@ -19,11 +19,12 @@ module.exports = {
     'react',
   ],
   'rules': {
-    'semi': ['error', 'always'],
-    'quotes': ['error', 'single'],
-    'jsx-quotes': ['error', 'prefer-double'],
-    'max-len': ['error', { 'code': 130 }],
+    'semi': ['warn', 'always'],
+    'quotes': ['warn', 'single'],
+    'jsx-quotes': ['warn', 'prefer-double'],
+    'max-len': ['warn', { 'code': 130 }],
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
+    'no-unused-vars': ['warn', { 'vars': 'all', 'args': 'after-used', 'ignoreRestSiblings': false }],
   },
 };
