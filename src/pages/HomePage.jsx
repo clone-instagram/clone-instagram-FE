@@ -21,9 +21,9 @@ export default function HomePage() {
     dispatch(fetchGetPosts());
   }, [dispatch]);
 
-  const handleChangeInputField = (event) => {
+  const handleChangeInputField = (event, postId) => {
     const { target: { id, value } } = event;
-    dispatch(changeInputField({ id, value }));
+    dispatch(changeInputField({ id, value, postId }));
   };
 
   const handleClickPostComment = (postId) => {
