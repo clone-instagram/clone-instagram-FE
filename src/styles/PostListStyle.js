@@ -35,16 +35,21 @@ export const PostListStyle = styled.div`
         padding: 0 0.8rem;
         display: flex;
         margin: 8px 0;
+        width: 80%;
         & > span {
           font-weight: 700;
-          margin-right: 4px;
+        }
+        & > p {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
       }
       .comment-content {
         padding: 0 0.8rem;
         display: flex;
         flex-direction: column;
-        & a {
+        & > a {
           color: rgba(0, 0, 0, 0.4);
         }
         & > span {

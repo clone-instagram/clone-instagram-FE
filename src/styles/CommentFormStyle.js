@@ -16,7 +16,7 @@ export const CommentFormStyle = styled.div`
     }
     input {
       :focus {
-      outline: none;
+        outline: none;
       }
     }
   }
@@ -26,7 +26,7 @@ export const CommentFormStyle = styled.div`
     font-size: 14px;
     font-weight: 500;
     :hover {
-      color: #0099FF;
+      color: #0099ff;
     }
   }
 `;
