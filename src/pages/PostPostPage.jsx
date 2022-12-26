@@ -108,7 +108,7 @@ const PostPostPage = () => {
           <StUserBox>
             {/* <img src={localStorage.getItem("profileUrl")}></img> */}
             <p>{localStorage.getItem("username")}</p>
-            <p>{localStorage.getItem("profileUrl")}</p>
+            {/* <p>{localStorage.getItem("profileUrl")}</p> */}
           </StUserBox>
           <StPostBox
             placeholder="문구 입력.."

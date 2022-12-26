@@ -1,59 +1,100 @@
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { __postLogin } from "../redux/modules/loginSlice";
+import { __postSignup } from "../redux/modules/loginSlice";
 import { useInput } from "../lib/utils/useInput";
-// import StButton from "../components/button/Button";
-import insta from "../assets/images/instaImage.png";
+// import Button from "../components/button/Button";
+// import insta from "../assets/images/instaImage.png";
 import logo from "../assets/images/instaLogo.png";
 import line from "../assets/images/loginLine.png";
+// import { useDispatch } from "react-redux";
+// import { apis } from "../lib/axios";
 
-const PostLoginPage = () => {
+const PostSignUpPage = () => {
   const url1 =
     "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
   const url2 =
     "ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko";
 
   const [email, setEmail] = useInput();
+  const [username, setUserName] = useInput();
   const [password, setPassword] = useInput();
+
+  // const dispatch = useDispatch();
 
   const navigate = useNavigate();
   // 로그인 관련
-  const onSubmitLogin = (e) => {
+  // const onSubmitSignup = (e) => {
+  //   e.preventDefault();
+  //   // dispatch(__postSignup({ email, username, password }))
+  //   apis.postSignup({ email, username, password }).then((res) => {
+  //     // if (res.statusCode === 200) {
+  //     //   alert(res.statusMsg);
+  //     // }
+
+  //     navigate("/main");
+  //   });
+  // };
+
+  const onSubmitSignup = (e) => {
     e.preventDefault();
-    __postLogin({
+    __postSignup({
       email,
+      username,
       password,
     }).then((res) => {
-      console.log("res:::::", res);
-      if (res.statusCode === 200) {
-        alert(res.statusMsg);
-      }
-      localStorage.setItem("id", res.headers.authorization);
-      localStorage.setItem("username", res.data.data.username);
-      // localStorage.setItem("profileUrl", res.data.data.profileUrl);
-      navigate("/main");
+      console.log("signup res: ", res);
+      // if (res.data.statusCode === 200) {
+      //   alert(res.data.msg);
+      // }
+      // localStorage.setItem("id", res.headers.authorization);
+      navigate("/login");
     });
+    // .catch((err) => {
+    //   // console.log("error: ", err);
+    // });
   };
+
+  // id 중복 체크 확인
+  // const onCheckUserName = (username) => {
+  //   console.log("username---->", username);
+  //   __checkUserName(username).then((res) => {
+  //     console.log(res);
+  //   });
+  // };
+
   return (
-    <StContainer onSubmit={onSubmitLogin}>
+    <StContainer onSubmit={onSubmitSignup}>
       <div>
-        <StLeftBox>
-          <img src={insta} alt="" width={380} height={580} />
-        </StLeftBox>
         <StRightBox1>
           <StRightBox2>
             <img src={logo} alt="" />
-            <br></br>
 
+            <StH>
+              친구들의 사진과 동영상을 보려면<br></br>가입하세요.
+            </StH>
+            <StButton>KaKao로 로그인</StButton>
+            <div>
+              <img src={line} alt="" />
+            </div>
             <StInput
               type="text"
               id="email"
               value={email}
               onChange={setEmail}
-              placeholder="전화번호,사용자 이름 또는 이메일"
+              placeholder="휴대폰 번호 또는 이메일 주소"
               required
               minLength={4}
               maxLength={30}
+            />
+            <StInput
+              type="text"
+              id="username"
+              value={username}
+              onChange={setUserName}
+              placeholder="사용자 이름"
+              required
+              minLength={4}
+              maxLength={10}
             />
             <StInput
               type="password"
@@ -65,17 +106,22 @@ const PostLoginPage = () => {
               minLength={8}
               maxLength={15}
             />
-            <StButton log>로그인</StButton>
-            <div>
-              <img src={line} alt="" />
-            </div>
+            <StP>
+              저희 서비스를 이용하는 사람이 회원님의 연락처<br></br>정보를
+              Instagram에 업로드 했을 수도 있습니다.
+              <br></br>
+              <a href="https://www.facebook.com/help/instagram/261704639352628?hl=ko">
+                더 알아보기
+              </a>
+            </StP>
+            <StButton log>가입</StButton>
           </StRightBox2>
           <StRightBox3>
             <div>
-              계정이 없으신가요?{" "}
-              <StButton reg onClick={() => navigate("/signup")}>
-                가입하기
-              </StButton>
+              계정이 있으신가요? &nbsp;
+              <StButtons reg onClick={() => navigate("/login")}>
+                로그인
+              </StButtons>
             </div>
           </StRightBox3>
           <br></br>
@@ -130,6 +176,9 @@ const PostLoginPage = () => {
     </StContainer>
   );
 };
+
+export default PostSignUpPage;
+
 const StContainer = styled.form`
   width: 100%;
   height: 100vh;
@@ -139,21 +188,10 @@ const StContainer = styled.form`
   justify-content: center;
   background-size: cover;
 `;
-const StLeftBox = styled.div`
-  background: #c0e9fc;
-  box-sizing: border-box;
-  float: left;
-  height: 580px;
-  width: 380px;
-  margin-bottom: 10px;
-  margin: 0px 10px 12px 0px;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-`;
+
 const StRightBox1 = styled.div`
   width: 400px;
-  height: 600px;
+  height: 950px;
   align-items: center;
   border: 0;
   border-radius: 1px;
@@ -162,10 +200,8 @@ const StRightBox1 = styled.div`
   float: right;
   flex-direction: column;
   flex-shrink: 0;
-
   font-size: 100%;
-  /* margin: 5px 0 0px;
-  padding: 30px 0px; */
+  padding: 30px 0px;
   /* position: relative; */
   /* vertical-align: baseline; */
 `;
@@ -173,16 +209,14 @@ const StRightBox1 = styled.div`
 const StRightBox2 = styled.div`
   background-color: white;
   width: 350px;
-  height: 380px;
+  height: 550px;
   align-items: center;
   border: 1px solid #dbdbdb;
   border-radius: 1px;
   box-sizing: border-box;
   display: flex;
-  float: right;
   flex-direction: column;
   flex-shrink: 0;
-
   font-size: 100%;
   margin: 5px 0 0px;
   padding: 30px 0px;
@@ -208,14 +242,13 @@ const StRightBox3 = styled.div`
 
 const StInput = styled.input`
   width: 268px;
-  height: 38px;
+  height: 35px;
   background-color: #fafafa;
-  border: 0.5px solid #dbdbdb;
+  border: 0.5px solid #b2b3b2;
   border-radius: 3px;
   padding-left: 10px;
   margin-top: 5px;
-  font-size: 15px;
-
+  font-size: 12px;
   /* &:hover {
     border: 0.5px solid black;
   } */
@@ -237,30 +270,41 @@ const StImgButtons = styled.button`
   background-image: url("https://static.cdninstagram.com/rsrc.php/v3/yw/r/LBxTdceDfgS.png");
   background-size: cover;
   margin-left: 10px;
-
   cursor: pointer;
 `;
 
-// const StButton = styled.button`
-//   margin: 15px 40px;
-//   width: 280px;
-//   height: 37px;
-//   border: 0;
-//   font-size: 17px;
-//   font-weight: bold;
-//   border-radius: 10px;
-//   background-color: #0095f6;
-//   font-family: georgia;
-//   color: white;
-//   cursor: pointer;
-
-//   &:hover {
-//     background-color: #1877f2;
-//   }
-
-// `;
-
 const StButton = styled.button`
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 280px;
+  height: 33px;
+  border: 0;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: #0095f6;
+  font-family: georgia;
+  color: white;
+  cursor: pointer;
+  &:hover {
+    background-color: #1877f2;
+  }
+  //   width: 100%;
+  //
+`;
+const StH = styled.h4`
+  color: #8e8e8e;
+  text-align: center;
+  font-weight: bold;
+`;
+
+const StP = styled.p`
+  color: #989c98;
+  font-size: 12px;
+  text-align: center;
+`;
+
+const StButtons = styled.button`
   cursor: pointer;
   ${(props) =>
     props.log &&
@@ -276,7 +320,6 @@ const StButton = styled.button`
       font-family: georgia;
       color: white;
       cursor: pointer;
-
       &:hover {
         background-color: #1877f2;
       }
@@ -284,7 +327,7 @@ const StButton = styled.button`
   ${(props) =>
     props.reg &&
     css`
-      width: 80px;
+      width: 70px;
       height: 40px;
       border: 0px;
       background-color: white;
@@ -297,4 +340,3 @@ const StButton = styled.button`
       cursor: pointer;
     `}
 `;
-export default PostLoginPage;
