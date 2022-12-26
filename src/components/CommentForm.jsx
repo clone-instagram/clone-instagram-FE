@@ -14,7 +14,7 @@ export default function CommentForm({
           id="content"
           value={inputField ? inputField.content : ''}
           placeholder="댓글 달기..."
-          onChange={(e) => onChangeInputField(e)}
+          onChange={(e) => onChangeInputField(e, postId)}
         />
       </div>
       <button

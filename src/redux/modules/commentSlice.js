@@ -11,29 +11,27 @@ import {
   fetchAddComment
 } from '../middleware/thunk';
 
-export const post = createSlice({
-  name: 'post',
+export const comment = createSlice({
+  name: 'comment',
   initialState: {
     status: '',
     alert: '',
     postList: [],
     currPost: {},
     setImgUrl: '',
-    inputField: {
-      title: '',
+    inputField: [{
+      id: null,
       content: '',
-      username: '',
-      password: '',
-      checkPassword: '',
-      admin: false,
-    },
+    }],
   },
   reducers: {
-    changeInputField: (state, { payload: { id, value } }) => {
-      const { inputField } = state;
+    changeInputField: (state, { payload: { id, value, postId } }) => {
       return {
         ...state,
-        inputField: { ...inputField, [id]: value },
+        inputField: [{
+          id: postId,
+          [id]: value
+        }],
       };
     },
     clearAll: (state) => {
@@ -72,11 +70,11 @@ export const post = createSlice({
           status: 'error',
         };
       })
-      .addCase(fetchGetPosts.fulfilled, (state, { payload: { data } }) => {
+      .addCase(fetchGetPosts.fulfilled, (state, { payload: { data: { postList } } }) => {
         return {
           ...state,
           status: 'success',
-          postList: [...data]
+          postList
         };
       })
       .addCase(fetchGetPost.pending, (state) => {
@@ -206,7 +204,7 @@ export const post = createSlice({
 
 export const {
   changeInputField, clearAll, setMessage
-} = post.actions;
+} = comment.actions;
 
-const postReducer = post.reducer;
-export default postReducer;
+const commentReducer = comment.reducer;
+export default commentReducer;
