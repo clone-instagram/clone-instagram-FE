@@ -6,8 +6,8 @@ import { useInput } from '../lib/utils/useInput';
 // import insta from "../assets/images/instaImage.png";
 import logo from '../assets/images/instaLogo.png';
 import line from '../assets/images/loginLine.png';
-import { useDispatch } from 'react-redux';
-import { apis } from '../lib/axios';
+// import { useDispatch } from "react-redux";
+// import { apis } from "../lib/axios";
 
 const PostSignUpPage = () => {
   const url1 =
@@ -18,27 +18,40 @@ const PostSignUpPage = () => {
   const [email, setEmail] = useInput();
   const [username, setUserName] = useInput();
   const [password, setPassword] = useInput();
-  const dispatch = useDispatch();
+
+  // const dispatch = useDispatch();
 
   const navigate = useNavigate();
   // 로그인 관련
+  // const onSubmitSignup = (e) => {
+  //   e.preventDefault();
+  //   // dispatch(__postSignup({ email, username, password }))
+  //   apis.postSignup({ email, username, password }).then((res) => {
+  //     // if (res.statusCode === 200) {
+  //     //   alert(res.statusMsg);
+  //     // }
+
+  //     navigate("/main");
+  //   });
+  // };
+
   const onSubmitSignup = (e) => {
-    // alert(123);
     e.preventDefault();
-    // dispatch(__postSignup({ email, username, password }))
-    apis
-      .postSignup({ email, username, password })
-      .then((res) => {
-        console.log('signup res: ', res);
-        if (res.data.statusCode === 200) {
-          alert(res.data.msg);
-        }
-        // localStorage.setItem("id", res.headers.authorization);
-        navigate('/login');
-      })
-      .catch((err) => {
-        //console.log(err)
-      });
+    __postSignup({
+      email,
+      username,
+      password,
+    }).then((res) => {
+      console.log('signup res: ', res);
+      // if (res.data.statusCode === 200) {
+      //   alert(res.data.msg);
+      // }
+      // localStorage.setItem("id", res.headers.authorization);
+      navigate('/login');
+    });
+    // .catch((err) => {
+    //   // console.log("error: ", err);
+    // });
   };
 
   // id 중복 체크 확인
@@ -94,11 +107,9 @@ const PostSignUpPage = () => {
               maxLength={15}
             />
             <StP>
-              저희 서비스를 이용하는 사람이 회원님의 연락처<br></br>정보를
-              Instagram에 업로드 했을 수도 있습니다.<br></br>
-              <a href="https://www.facebook.com/help/instagram/261704639352628?hl=ko">
-                더 알아보기
-              </a>
+              저희 서비스를 이용하는 사람이 회원님의 연락처<br></br>정보를 Instagram에 업로드 했을 수도 있습니다.
+              <br></br>
+              <a href="https://www.facebook.com/help/instagram/261704639352628?hl=ko">더 알아보기</a>
             </StP>
             <StButton log>가입</StButton>
           </StRightBox2>
@@ -246,7 +257,7 @@ const StImgButton = styled.button`
   width: 150px;
   height: 45px;
   border: 0px;
-  background-image: url("https://static.cdninstagram.com/rsrc.php/v3/ye/r/UtJtFmFLCiD.png");
+  background-image: url('https://static.cdninstagram.com/rsrc.php/v3/ye/r/UtJtFmFLCiD.png');
   background-size: cover;
   cursor: pointer;
 `;
@@ -255,7 +266,7 @@ const StImgButtons = styled.button`
   width: 130px;
   height: 45px;
   border: 0px;
-  background-image: url("https://static.cdninstagram.com/rsrc.php/v3/yw/r/LBxTdceDfgS.png");
+  background-image: url('https://static.cdninstagram.com/rsrc.php/v3/yw/r/LBxTdceDfgS.png');
   background-size: cover;
   margin-left: 10px;
   cursor: pointer;

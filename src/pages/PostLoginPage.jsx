@@ -23,19 +23,17 @@ const PostLoginPage = () => {
     __postLogin({
       email,
       password,
-    })
-      .then((res) => {
-        console.log('res: ', res);
-        if (res.data.statusCode === 200) {
-          alert('로그인 성공');
-        }
-        localStorage.setItem('id', res.headers.authorization);
-        navigate('/main');
-      })
-      .catch((error) => alert('ID 또는 비밀번호가 틀립니다!'));
-    // .catch((error) => alert(error.response.data.msg));
+    }).then((res) => {
+      console.log('res:::::', res);
+      if (res.statusCode === 200) {
+        alert(res.statusMsg);
+      }
+      localStorage.setItem('id', res.headers.authorization);
+      localStorage.setItem('username', res.data.data.username);
+      // localStorage.setItem("profileUrl", res.data.data.profileUrl);
+      navigate('/main');
+    });
   };
-
   return (
     <StContainer onSubmit={onSubmitLogin}>
       <div>
@@ -132,9 +130,6 @@ const PostLoginPage = () => {
     </StContainer>
   );
 };
-
-export default PostLoginPage;
-
 const StContainer = styled.form`
   width: 100%;
   height: 100vh;
@@ -230,7 +225,7 @@ const StImgButton = styled.button`
   width: 150px;
   height: 45px;
   border: 0px;
-  background-image: url("https://static.cdninstagram.com/rsrc.php/v3/ye/r/UtJtFmFLCiD.png");
+  background-image: url('https://static.cdninstagram.com/rsrc.php/v3/ye/r/UtJtFmFLCiD.png');
   background-size: cover;
   cursor: pointer;
 `;
@@ -239,7 +234,7 @@ const StImgButtons = styled.button`
   width: 130px;
   height: 45px;
   border: 0px;
-  background-image: url("https://static.cdninstagram.com/rsrc.php/v3/yw/r/LBxTdceDfgS.png");
+  background-image: url('https://static.cdninstagram.com/rsrc.php/v3/yw/r/LBxTdceDfgS.png');
   background-size: cover;
   margin-left: 10px;
 
@@ -302,3 +297,4 @@ const StButton = styled.button`
       cursor: pointer;
     `}
 `;
+export default PostLoginPage;
