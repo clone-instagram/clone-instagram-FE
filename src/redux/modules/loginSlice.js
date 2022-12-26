@@ -9,7 +9,7 @@ export const __postLogin = async (post) => {
     //   email: "eve.holt@reqres.in",
     //   password: "cityslicka",
     // });
-    console.log("post: ", post);
+    console.log("post`: ", post);
     console.log("data: ", data);
     return data;
   } catch (error) {
@@ -39,18 +39,18 @@ export const __postLogout = async () => {
 };
 
 // id 중복체크
-export const __checkUserName = async (username) => {
-  try {
-    const data = await apis.checkUserName(username);
-    console.log("username: ", username);
-    console.log("data: ", data);
-    if (data.data.statusCode === 200) {
-      alert(data.data.msg);
-    }
-    // useSweet(1000, "success", "회원가입 성공");
-    return data;
-  } catch (error) {
-    alert(error.response.data.msg);
-    // useSweet(1000, "error", error.response.data.msg);
-  }
-};
+// export const __checkEmail = async (email) => {
+//   try {
+//     const data = await apis.checkUserName(email);
+//     console.log("email: ", email);
+//     console.log("data: ", data);
+//     if (data.data.statusCode === 200) {
+//       alert(data.data.msg);
+//     }
+//     // useSweet(1000, "success", "회원가입 성공");
+//     return data;
+//   } catch (error) {
+//     alert(error.response.data.msg);
+//     // useSweet(1000, "error", error.response.data.msg);
+//   }
+// };

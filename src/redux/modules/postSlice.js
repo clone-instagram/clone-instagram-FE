@@ -157,7 +157,7 @@ export const postSlice = createSlice({
     },
     [__getIdPost.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-      state.post = action.payload.data; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+      state.posts = action.payload.data; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
       // console.log("action.payload: ", action.payload);
       // console.log("state.posts: ", state.posts);
     },

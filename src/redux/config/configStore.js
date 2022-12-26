@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import posts from "../modules/postSlice";
+import post from "../modules/postSlice";
 
 // import login from "../modules/loginSlice";
 
 const store = configureStore({
-  reducer: { posts },
+  reducer: { post },
 });
 
 export default store;

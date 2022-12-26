@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
-  baseURL: "http://localhost:3003",
+  baseURL: "http://13.125.118.137/api",
   header: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -12,7 +12,7 @@ const instance = axios.create({
 
 // baseURL
 export const baseURL = axios.create({
-  baseURL: "http://localhost:3003",
+  baseURL: "http://13.125.118.137/api",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -33,31 +33,27 @@ export const apis = {
   // 로그인 관련
   postLogin: (login) => instance.post("/user/login", login),
   postSignup: (signup) => instance.post("/user/signup", signup),
-  checkUserName: (username) => instance.get(`/user/idCheck/${username}`),
+  // checkEmail: (email) => instance.get(`/user/idCheck/${email}`),
   postLogout: () => instance.get("/user/logout"),
 
   // 게시글 관련
   getPost: () => baseURL.get("/posts"),
-  getIdPost: (id) => {
-    return baseURL.get(`/post/${id}`);
+  getIdPost: (postid) => {
+    return baseURL.get(`/posts/${postid}/update`);
   },
 
-  createPost: (post) => {
-    console.log("payload::", post);
-    baseURL.post("/posts", post, {
+  createPost: (posts) => {
+    console.log("payload::", posts);
+    baseURL.post("/posts", posts, {
       headers: { "Content-Type": "multipart/form-data" },
     });
   },
-  deletePost: (id) => baseURL.delete(`/post/${id}`),
-  editPost: (id, post) =>
+  deletePost: (postid) => baseURL.delete(`/posts/${postid}`),
+  editPost: (postid, posts) =>
     // console.log("string", id, post);
-    baseURL.patch(`/posts/${id}`, post, {
+    baseURL.put(`/posts/${postid}`, posts, {
       headers: { "Content-Type": "multipart/form-data" },
     }),
-
-  // topPost: () => baseURL.get("/tops"),
-
-  // category,title,imageUrl,post.like
 
   // 리뷰 관련
   // getComment: (postId) => baseURL.get(`/post/${postId}`),

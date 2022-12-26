@@ -1,13 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { __postLogin } from "../redux/modules/loginSlice";
+import { __postSignup } from "../redux/modules/loginSlice";
 import { useInput } from "../lib/utils/useInput";
-import Button from "../components/button/Button";
+// import Button from "../components/button/Button";
 // import insta from "../assets/images/instaImage.png";
 import logo from "../assets/images/instaLogo.png";
 import line from "../assets/images/loginLine.png";
+import { useDispatch } from "react-redux";
+import { apis } from "../lib/axios";
 
-const PostLoginPage = () => {
+const PostSignUpPage = () => {
   const url1 =
     "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
   const url2 =
@@ -16,29 +18,39 @@ const PostLoginPage = () => {
   const [email, setEmail] = useInput();
   const [username, setUserName] = useInput();
   const [password, setPassword] = useInput();
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   // 로그인 관련
-  const onSubmitLogin = (e) => {
+  const onSubmitSignup = (e) => {
+    // alert(123);
     e.preventDefault();
-    __postLogin({
-      username,
-      password,
-    })
+    // dispatch(__postSignup({ email, username, password }))
+    apis
+      .postSignup({ email, username, password })
       .then((res) => {
-        console.log("res: ", res);
+        console.log("signup res: ", res);
         if (res.data.statusCode === 200) {
-          alert("로그인 성공");
+          alert(res.data.msg);
         }
-        localStorage.setItem("id", res.headers.authorization);
+        // localStorage.setItem("id", res.headers.authorization);
         navigate("/login");
       })
-      .catch((error) => alert("ID 또는 비밀번호가 틀립니다!"));
-    // .catch((error) => alert(error.response.data.msg));
+      .catch((err) => {
+        //console.log(err)
+      });
   };
 
+  // id 중복 체크 확인
+  // const onCheckUserName = (username) => {
+  //   console.log("username---->", username);
+  //   __checkUserName(username).then((res) => {
+  //     console.log(res);
+  //   });
+  // };
+
   return (
-    <StContainer onSubmit={onSubmitLogin}>
+    <StContainer onSubmit={onSubmitSignup}>
       <div>
         <StRightBox1>
           <StRightBox2>
@@ -59,10 +71,10 @@ const PostLoginPage = () => {
               placeholder="휴대폰 번호 또는 이메일 주소"
               required
               minLength={4}
-              maxLength={10}
+              maxLength={30}
             />
             <StInput
-              type="username"
+              type="text"
               id="username"
               value={username}
               onChange={setUserName}
@@ -88,7 +100,7 @@ const PostLoginPage = () => {
                 더 알아보기
               </a>
             </StP>
-            <StButton>가입</StButton>
+            <StButton log>가입</StButton>
           </StRightBox2>
           <StRightBox3>
             <div>
@@ -151,9 +163,9 @@ const PostLoginPage = () => {
   );
 };
 
-export default PostLoginPage;
+export default PostSignUpPage;
 
-const StContainer = styled.div`
+const StContainer = styled.form`
   width: 100%;
   height: 100vh;
   display: flex;

@@ -55,7 +55,7 @@ const PostLoginPage = () => {
               placeholder="전화번호,사용자 이름 또는 이메일"
               required
               minLength={4}
-              maxLength={10}
+              maxLength={30}
             />
             <StInput
               type="password"
@@ -135,7 +135,7 @@ const PostLoginPage = () => {
 
 export default PostLoginPage;
 
-const StContainer = styled.div`
+const StContainer = styled.form`
   width: 100%;
   height: 100vh;
   display: flex;
