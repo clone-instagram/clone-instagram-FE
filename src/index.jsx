@@ -1,3 +1,4 @@
+import { GlobalStyle } from './styles/GlobalStyle';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -18,6 +19,7 @@ root.render(
     <Provider store={store}>
       <React.StrictMode>
         <BrowserRouter>
+          <GlobalStyle />
           <App />
         </BrowserRouter>
       </React.StrictMode>
