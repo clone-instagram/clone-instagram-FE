@@ -8,7 +8,7 @@ export const TopNavBarStyle = styled.div`
   width: 100%;
   border-bottom: 1px solid #D6D6D6;
   & > div {
-    width: 50%;
+    width: 60%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -17,9 +17,6 @@ export const TopNavBarStyle = styled.div`
       width: 30%;
       img {
       width: 50%;
-      :hover {
-        cursor: pointer;
-      }
       }
     }
     .search {
@@ -45,11 +42,15 @@ export const TopNavBarStyle = styled.div`
       text-align: center;
       width: 35%;
       a {
-        padding: 4px 8px;
+        img {
+        margin-right: 8px;
         border-radius: 12px;
-        margin-right: 4px;
-      :hover {
+        padding: 4px;
+        width: 36px;
+        height: 36px;
+        :hover {
         background-color: #F2F2F2;
+      }
       }
       }
     }
