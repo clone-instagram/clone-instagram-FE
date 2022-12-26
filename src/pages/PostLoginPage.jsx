@@ -24,11 +24,13 @@ const PostLoginPage = () => {
       email,
       password,
     }).then((res) => {
+      console.log("res:::::", res);
       if (res.statusCode === 200) {
         alert(res.statusMsg);
       }
       localStorage.setItem("id", res.headers.authorization);
-      localStorage.setItem("username", res.headers.authorization);
+      localStorage.setItem("username", res.data.data.username);
+      // localStorage.setItem("profileUrl", res.data.data.profileUrl);
       navigate("/main");
     });
   };

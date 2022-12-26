@@ -38,9 +38,13 @@ export const apis = {
 
   // 게시글 관련
   getPost: () => baseURL.get("/posts"),
-  getIdPost: (postid) => {
+  getUpdatePost: (postid) => {
     return baseURL.get(`/posts/${postid}/update`);
   },
+
+  // getUsername : (postid) => {
+  //   return baseURL.get(`/posts/${postid}`)
+  // },
 
   createPost: (posts) => {
     console.log("payload::", posts);

@@ -42,7 +42,7 @@ const PostPostPage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [content, setContent] = useState("");
   const [posts, setPosts] = useState([]);
-  const [username, setUsername] = useState("");
+
   // const setFile = (e) => {};
 
   // const setFileImage = (event) => {
@@ -66,19 +66,6 @@ const PostPostPage = () => {
   //   content: "",
   //   category: "",
   // });
-
-  useEffect(() => {
-    apis
-      .getPost()
-      .then((res) => {
-        const get = res.data;
-        console.log("res::", res);
-        setUsername(get);
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
-  }, []);
 
   const onSubmitHandler = () => {
     // console.log(content);
@@ -119,7 +106,9 @@ const PostPostPage = () => {
         <StLeftBox alt="" src={imageUrl ? imageUrl : white}></StLeftBox>
         <StRightBox>
           <StUserBox>
-            <p>{post.username}</p>
+            {/* <img src={localStorage.getItem("profileUrl")}></img> */}
+            <p>{localStorage.getItem("username")}</p>
+            <p>{localStorage.getItem("profileUrl")}</p>
           </StUserBox>
           <StPostBox
             placeholder="문구 입력.."
