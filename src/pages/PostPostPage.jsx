@@ -142,7 +142,7 @@ const PostPostPage = () => {
     </StContainer>
   );
 };
-
+// 12/27 최신화
 export default PostPostPage;
 
 const StContainer = styled.div`
