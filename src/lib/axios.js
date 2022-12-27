@@ -2,7 +2,7 @@ import axios from "axios";
 
 // 기본 URL
 const instance = axios.create({
-  baseURL: "http://13.125.118.137/api",
+  baseURL: "http://52.79.64.171/api",
   header: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -12,7 +12,7 @@ const instance = axios.create({
 
 // baseURL
 export const baseURL = axios.create({
-  baseURL: "http://13.125.118.137/api",
+  baseURL: "http://52.79.64.171/api",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
@@ -37,9 +37,9 @@ export const apis = {
   postLogout: () => instance.get("/user/logout"),
 
   // 게시글 관련
-  getPost: () => baseURL.get("/posts"),
-  getIdPost: (postid) => {
-    return baseURL.get(`/posts/${postid}/update`);
+  getPost: () => baseURL.get(`/posts`),
+  getIdPost: (id) => {
+    return baseURL.get(`/posts/${id}/update`);
   },
 
   // getUsername : (postid) => {
@@ -52,12 +52,20 @@ export const apis = {
       headers: { "Content-Type": "multipart/form-data" },
     });
   },
-  deletePost: (postid) => baseURL.delete(`/posts/${postid}`),
-  editPost: (postid, posts) =>
-    // console.log("string", id, post);
-    baseURL.put(`/posts/${postid}`, posts, {
+  deletePost: (id) => baseURL.delete(`/posts/${id}`),
+
+  editPost: ({ id, formdata }) => {
+    // console.log("string", payload);
+    baseURL.patch(`/posts/${id}`, formdata, {
       headers: { "Content-Type": "multipart/form-data" },
-    }),
+    });
+  },
+
+  // editPost: (id, post) =>
+  //   // console.log("string", id, post);
+  //   baseURL.put(`/posts/${id}`, post, {
+  //     headers: { "Content-Type": "multipart/form-data" },
+  //   }),
 
   // 리뷰 관련
   // getComment: (postId) => baseURL.get(`/post/${postId}`),
