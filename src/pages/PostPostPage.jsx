@@ -205,7 +205,6 @@ const StRightBox = styled.div`
   width: 339px;
   height: 855px;
   align-items: center;
-
   border-radius: 1px;
   /* box-sizing: border-box; */
   display: flex;
@@ -276,7 +275,6 @@ const StPostBox = styled.textarea`
   font-family: Arial;
   padding-left: 16px;
   padding-right: 16px;
-
   &::-webkit-scrollbar {
     display: none;
   }

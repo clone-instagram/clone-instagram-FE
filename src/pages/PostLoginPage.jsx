@@ -162,7 +162,6 @@ const StRightBox1 = styled.div`
   float: right;
   flex-direction: column;
   flex-shrink: 0;
-
   font-size: 100%;
   /* margin: 5px 0 0px;
   padding: 30px 0px; */
@@ -182,7 +181,6 @@ const StRightBox2 = styled.div`
   float: right;
   flex-direction: column;
   flex-shrink: 0;
-
   font-size: 100%;
   margin: 5px 0 0px;
   padding: 30px 0px;
@@ -215,7 +213,6 @@ const StInput = styled.input`
   padding-left: 10px;
   margin-top: 5px;
   font-size: 15px;
-
   /* &:hover {
     border: 0.5px solid black;
   } */
@@ -237,7 +234,6 @@ const StImgButtons = styled.button`
   background-image: url("https://static.cdninstagram.com/rsrc.php/v3/yw/r/LBxTdceDfgS.png");
   background-size: cover;
   margin-left: 10px;
-
   cursor: pointer;
 `;
 
@@ -276,7 +272,6 @@ const StButton = styled.button`
       font-family: georgia;
       color: white;
       cursor: pointer;
-
       &:hover {
         background-color: #1877f2;
       }
