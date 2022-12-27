@@ -6,6 +6,7 @@ import { useInput } from "../lib/utils/useInput";
 import insta from "../assets/images/instaImage.png";
 import logo from "../assets/images/instaLogo.png";
 import line from "../assets/images/loginLine.png";
+// import kakao from "../assets/images/kakao.png";
 
 const PostLoginPage = () => {
   const url1 =
@@ -69,6 +70,7 @@ const PostLoginPage = () => {
             <div>
               <img src={line} alt="" />
             </div>
+            {/* <KakaoBtn kakao href="">카카오 로그인</KakaoBtn> */}
           </StRightBox2>
           <StRightBox3>
             <div>
@@ -236,6 +238,27 @@ const StImgButtons = styled.button`
   margin-left: 10px;
   cursor: pointer;
 `;
+
+// const KakaoBtn = styled.button`
+//   ${(props) =>
+//     props.kakao &&
+//     css`
+//       margin: 15px 40px;
+//       width: 280px;
+//       height: 37px;
+//       border: 0;
+//       font-size: 17px;
+//       font-weight: bold;
+//       border-radius: 10px;
+//       background-color: #0095f6;
+//       font-family: georgia;
+//       color: white;
+//       cursor: pointer;
+//       &:hover {
+//         background-color: #1877f2;
+//       }
+//     `}
+// `;
 
 // const StButton = styled.button`
 //   margin: 15px 40px;

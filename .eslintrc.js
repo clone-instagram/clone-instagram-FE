@@ -17,7 +17,7 @@ module.exports = {
     // 'semi': ['error', 'always'],
     // 'quotes': ['error', 'single'],
     "jsx-quotes": ["warn", "prefer-double"],
-    // 'max-len': ['error', { 'code': 130 }],
+    "max-len": ["warn", { code: 130 }],
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "no-unused-vars": [
