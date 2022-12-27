@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PostPostPage from "../pages/PostPostPage";
 import PostLoginPage from "../pages/PostLoginPage";
 import PostSignUpPage from "../pages/PostSignUpPage";
-import PostEditPage from "../pages/PostEditPadge";
+import PostEditPage from "../pages/PostEditPage";
 // import PostEditPage from "../pages/PostEditPadge";
 
 const Router = () => {
