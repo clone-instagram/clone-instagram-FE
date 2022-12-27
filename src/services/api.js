@@ -2,15 +2,11 @@ import axios from 'axios';
 
 import { saveItem, loadItem } from './storage';
 
-const tmpURL = axios.create({
-  baseURL: 'http://localhost:3003',
-});
-
 const baseURL = axios.create({
   baseURL: 'http://52.79.64.171',
   headers: {
     'Access-Control-Allow-Origin': '*',
-    Authorization: `${loadItem('success')}`,
+    Authorization: `${loadItem('id')}`,
   },
 });
 
