@@ -1,13 +1,13 @@
 import { UserInfoStyle } from '../../styles/UserInfoStyle';
 
-import tmp from '../.././assets/tmp.png';
 import more from '../.././assets/outline-icons/more.svg';
+import UserProfile from './UserProfile';
 
 export default function UserInfo({ postUsername, postProfileUrl }) {
   return (
     <UserInfoStyle>
       <div>
-        <img src={postProfileUrl ? postProfileUrl : tmp} />
+        <UserProfile postProfileUrl={postProfileUrl} />
         <span>{postUsername}</span>
       </div>
       <button type="button">
