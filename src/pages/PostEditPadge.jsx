@@ -92,7 +92,7 @@ const PostEditPage = () => {
         onSubmit={(e) => {
           e.preventDefault();
           onEditHandler(Number(param.id), editposts);
-          //   navigate("/main");
+          navigate("/main");
         }}
       >
         <div>
