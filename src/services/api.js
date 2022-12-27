@@ -29,9 +29,8 @@ export const getPosts = async () => {
 
 // 단일 게시글 조회
 export const getPost = async (postId) => {
-  const response = await baseURL.get(POST + `/${postId}`);
-  console.log(response);
-  return response;
+  const response = await baseURL.get(POSTS + `/${postId}`);
+  return response.data;
 };
 
 // 회원가입
