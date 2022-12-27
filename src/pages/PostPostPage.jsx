@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { apis } from '../lib/axios';
-import Button from '../components/button/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { __addPost } from '../redux/modules/postSlice';
-import white from '../assets/images/white.png';
+import React, { useState, useRef, useEffect } from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { apis } from "../lib/axios";
+import Button from "../components/button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { __addPost } from "../redux/modules/postSlice";
+import white from "../assets/images/white.png";
 // import axios from "axios";
 
 const PostPostPage = () => {
@@ -13,7 +13,7 @@ const PostPostPage = () => {
 
   const post = useSelector((state) => state.post);
 
-  console.log('posts???', post);
+  console.log("posts???", post);
 
   // const [imageUrl, setImageUrl] = useState(null);
   const imgRef = useRef();
@@ -28,7 +28,7 @@ const PostPostPage = () => {
     console.log(file);
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImageUrl(reader.result);
+      setImgUrl(reader.result);
       // const image = reader.result;
       setPosts({
         ...posts,
@@ -38,9 +38,9 @@ const PostPostPage = () => {
     };
   };
   // // console.log(imageUrl);
-  const [imagefile, setImageFile] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [content, setContent] = useState('');
+  const [imagefile, setImageFile] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
+  const [content, setContent] = useState("");
   const [posts, setPosts] = useState([]);
 
   // const setFile = (e) => {};
@@ -70,8 +70,8 @@ const PostPostPage = () => {
   const onSubmitHandler = () => {
     // console.log(content);
     const formdata = new FormData();
-    formdata.append('file', imagefile);
-    formdata.append('content', content.content);
+    formdata.append("file", imagefile);
+    formdata.append("content", content.content);
 
     console.log(formdata);
     console.log(typeof formdata);
@@ -79,7 +79,7 @@ const PostPostPage = () => {
     dispatch(__addPost(formdata));
 
     for (const pair of formdata) {
-      console.log(pair[0] + ', ' + pair[1]);
+      console.log(pair[0] + ", " + pair[1]);
     }
   };
   return (
@@ -88,7 +88,7 @@ const PostPostPage = () => {
         onSubmit={(e) => {
           e.preventDefault();
           onSubmitHandler(posts);
-          navigate('/main');
+          navigate("/main");
         }}
       >
         <div>
@@ -96,19 +96,19 @@ const PostPostPage = () => {
             <Button
               back
               onClick={() => {
-                navigate('/main');
+                navigate("/main");
               }}
             />
             <StH>새 게시물 만들기</StH>
             <Button add>공유하기</Button>
           </StTopBar>
         </div>
-        <StLeftBox alt="" src={imageUrl ? imageUrl : white}></StLeftBox>
+        <StLeftBox alt="" src={imgUrl ? imgUrl : white}></StLeftBox>
         <StRightBox>
           <StUserBox>
             {/* <img src={localStorage.getItem("profileUrl")}></img> */}
-            <p>{localStorage.getItem('username')}</p>
-            <p>{localStorage.getItem('profileUrl')}</p>
+            <p>{localStorage.getItem("username")}</p>
+            {/* <p>{localStorage.getItem("profileUrl")}</p> */}
           </StUserBox>
           <StPostBox
             placeholder="문구 입력.."
@@ -142,7 +142,7 @@ const PostPostPage = () => {
     </StContainer>
   );
 };
-
+// 12/27 최신화
 export default PostPostPage;
 
 const StContainer = styled.div`

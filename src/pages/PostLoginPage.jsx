@@ -1,17 +1,17 @@
-import { useNavigate } from 'react-router-dom';
-import styled, { css } from 'styled-components';
-import { __postLogin } from '../redux/modules/loginSlice';
-import { useInput } from '../lib/utils/useInput';
+import { useNavigate } from "react-router-dom";
+import styled, { css } from "styled-components";
+import { __postLogin } from "../redux/modules/loginSlice";
+import { useInput } from "../lib/utils/useInput";
 // import StButton from "../components/button/Button";
-import insta from '../assets/images/instaImage.png';
-import logo from '../assets/images/instaLogo.png';
-import line from '../assets/images/loginLine.png';
+import insta from "../assets/images/instaImage.png";
+import logo from "../assets/images/instaLogo.png";
+import line from "../assets/images/loginLine.png";
 
 const PostLoginPage = () => {
   const url1 =
-    'https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko';
+    "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
   const url2 =
-    'ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko';
+    "ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko";
 
   const [email, setEmail] = useInput();
   const [password, setPassword] = useInput();
@@ -24,14 +24,14 @@ const PostLoginPage = () => {
       email,
       password,
     }).then((res) => {
-      console.log('res:::::', res);
+      console.log("res:::::", res);
       if (res.statusCode === 200) {
         alert(res.statusMsg);
       }
-      localStorage.setItem('id', res.headers.authorization);
-      localStorage.setItem('username', res.data.data.username);
+      localStorage.setItem("id", res.headers.authorization);
+      localStorage.setItem("username", res.data.data.username);
       // localStorage.setItem("profileUrl", res.data.data.profileUrl);
-      navigate('/main');
+      navigate("/main");
     });
   };
   return (
@@ -72,8 +72,8 @@ const PostLoginPage = () => {
           </StRightBox2>
           <StRightBox3>
             <div>
-              계정이 없으신가요?{' '}
-              <StButton reg onClick={() => navigate('/signup')}>
+              계정이 없으신가요?{" "}
+              <StButton reg onClick={() => navigate("/signup")}>
                 가입하기
               </StButton>
             </div>
@@ -225,7 +225,7 @@ const StImgButton = styled.button`
   width: 150px;
   height: 45px;
   border: 0px;
-  background-image: url('https://static.cdninstagram.com/rsrc.php/v3/ye/r/UtJtFmFLCiD.png');
+  background-image: url("https://static.cdninstagram.com/rsrc.php/v3/ye/r/UtJtFmFLCiD.png");
   background-size: cover;
   cursor: pointer;
 `;
@@ -234,7 +234,7 @@ const StImgButtons = styled.button`
   width: 130px;
   height: 45px;
   border: 0px;
-  background-image: url('https://static.cdninstagram.com/rsrc.php/v3/yw/r/LBxTdceDfgS.png');
+  background-image: url("https://static.cdninstagram.com/rsrc.php/v3/yw/r/LBxTdceDfgS.png");
   background-size: cover;
   margin-left: 10px;
 

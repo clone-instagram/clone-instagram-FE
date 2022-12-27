@@ -1,21 +1,24 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import CommentForm from './CommentForm';
-import UserInfo from './UserInfo';
-import Icons from './Icons';
+import CommentForm from "./CommentForm";
+import UserInfo from "./UserInfo";
+import Icons from "./Icons";
 
-import { timeCalculator } from '.././utils/utils';
+import { timeCalculator } from ".././utils/utils";
 
-import { PostListStyle } from '../styles/PostListStyle';
+import { PostListStyle } from "../styles/PostListStyle";
 
 export default function PostList({
-  posts, inputField, onChangeInputField, onClickPostComment
+  posts,
+  inputField,
+  onChangeInputField,
+  onClickPostComment,
 }) {
   return (
     <PostListStyle>
       <ul>
-        {posts.map(post => (
-          <li key={post.id} >
+        {posts.map((post) => (
+          <li key={post.id}>
             <UserInfo postUsername={post.username} />
             <div className="img">
               <img src={post.imgUrl} />
@@ -31,12 +34,11 @@ export default function PostList({
                 <p>{post.content}</p>
               </div>
               <div className="comment-content">
-                {post.commentList && post.commentList.length !== 0 ?
+                {post.commentList && post.commentList.length !== 0 ? (
                   <Link to={`/comment/${post.id}`}>
                     {`댓글 ${post.commentList.length}개 모두 보기`}
                   </Link>
-                  : null
-                }
+                ) : null}
                 <span>{timeCalculator(post.createdAt)}</span>
               </div>
             </div>
@@ -49,6 +51,6 @@ export default function PostList({
           </li>
         ))}
       </ul>
-    </PostListStyle >
+    </PostListStyle>
   );
 }

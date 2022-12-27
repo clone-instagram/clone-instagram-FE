@@ -1,19 +1,19 @@
-import { useNavigate } from 'react-router-dom';
-import styled, { css } from 'styled-components';
-import { __postSignup } from '../redux/modules/loginSlice';
-import { useInput } from '../lib/utils/useInput';
+import { useNavigate } from "react-router-dom";
+import styled, { css } from "styled-components";
+import { __postSignup } from "../redux/modules/loginSlice";
+import { useInput } from "../lib/utils/useInput";
 // import Button from "../components/button/Button";
 // import insta from "../assets/images/instaImage.png";
-import logo from '../assets/images/instaLogo.png';
-import line from '../assets/images/loginLine.png';
+import logo from "../assets/images/instaLogo.png";
+import line from "../assets/images/loginLine.png";
 // import { useDispatch } from "react-redux";
 // import { apis } from "../lib/axios";
 
 const PostSignUpPage = () => {
   const url1 =
-    'https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko';
+    "https://play.google.com/store/apps/details?id=com.instagram.android&referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26ig_mid%3D15FEFE7D-0D09-478E-8972-E3FCBF1C8B88%26utm_content%3Dlo%26utm_medium%3Dbadge&hl=ko";
   const url2 =
-    'ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko';
+    "ms-windows-store://pdp/?productid=9nblggh5l9xt&referrer=appbadge&source=www.instagram.com&mode=mini&pos=-1287%2C0%2C1294%2C1399&hl=ko";
 
   const [email, setEmail] = useInput();
   const [username, setUserName] = useInput();
@@ -42,12 +42,12 @@ const PostSignUpPage = () => {
       username,
       password,
     }).then((res) => {
-      console.log('signup res: ', res);
+      console.log("signup res: ", res);
       // if (res.data.statusCode === 200) {
       //   alert(res.data.msg);
       // }
       // localStorage.setItem("id", res.headers.authorization);
-      navigate('/login');
+      navigate("/login");
     });
     // .catch((err) => {
     //   // console.log("error: ", err);
@@ -107,16 +107,20 @@ const PostSignUpPage = () => {
               maxLength={15}
             />
             <StP>
-              저희 서비스를 이용하는 사람이 회원님의 연락처<br></br>정보를 Instagram에 업로드 했을 수도 있습니다.
+              저희 서비스를 이용하는 사람이 회원님의 연락처<br></br>정보를
+              Instagram에 업로드 했을 수도 있습니다.
               <br></br>
-              <a href="https://www.facebook.com/help/instagram/261704639352628?hl=ko">더 알아보기</a>
+              <a href="https://www.facebook.com/help/instagram/261704639352628?hl=ko">
+                더 알아보기
+              </a>
             </StP>
             <StButton log>가입</StButton>
+            {/* <UserInfoStyle></UserInfoStyle> */}
           </StRightBox2>
           <StRightBox3>
             <div>
               계정이 있으신가요? &nbsp;
-              <StButtons reg onClick={() => navigate('/login')}>
+              <StButtons reg onClick={() => navigate("/login")}>
                 로그인
               </StButtons>
             </div>
@@ -197,7 +201,6 @@ const StRightBox1 = styled.div`
   float: right;
   flex-direction: column;
   flex-shrink: 0;
-
   font-size: 100%;
   padding: 30px 0px;
   /* position: relative; */
@@ -207,7 +210,7 @@ const StRightBox1 = styled.div`
 const StRightBox2 = styled.div`
   background-color: white;
   width: 350px;
-  height: 550px;
+  height: 600px;
   align-items: center;
   border: 1px solid #dbdbdb;
   border-radius: 1px;
@@ -247,7 +250,6 @@ const StInput = styled.input`
   padding-left: 10px;
   margin-top: 5px;
   font-size: 12px;
-
   /* &:hover {
     border: 0.5px solid black;
   } */
@@ -257,7 +259,7 @@ const StImgButton = styled.button`
   width: 150px;
   height: 45px;
   border: 0px;
-  background-image: url('https://static.cdninstagram.com/rsrc.php/v3/ye/r/UtJtFmFLCiD.png');
+  background-image: url("https://static.cdninstagram.com/rsrc.php/v3/ye/r/UtJtFmFLCiD.png");
   background-size: cover;
   cursor: pointer;
 `;
@@ -266,7 +268,7 @@ const StImgButtons = styled.button`
   width: 130px;
   height: 45px;
   border: 0px;
-  background-image: url('https://static.cdninstagram.com/rsrc.php/v3/yw/r/LBxTdceDfgS.png');
+  background-image: url("https://static.cdninstagram.com/rsrc.php/v3/yw/r/LBxTdceDfgS.png");
   background-size: cover;
   margin-left: 10px;
   cursor: pointer;
@@ -285,7 +287,6 @@ const StButton = styled.button`
   font-family: georgia;
   color: white;
   cursor: pointer;
-
   &:hover {
     background-color: #1877f2;
   }
@@ -304,6 +305,32 @@ const StP = styled.p`
   text-align: center;
 `;
 
+// const UserInfoStyle = styled.div`
+//   display: flex;
+
+//   padding: 0.8rem;
+//   border-bottom: 1px solid #d6d6d6;
+//   button {
+//     background-color: #fff;
+//     color: #000;
+//   }
+//   div {
+//     display: flex;
+//     align-items: center;
+//     img {
+//       margin-right: 12px;
+//       border: 1px solid #d6d6d6;
+//       width: 48px;
+//       height: 48px;
+//       border-radius: 24px;
+//     }
+//     span {
+//       font-weight: 500;
+//       font-size: 16px;
+//     }
+//   }
+// `;
+
 const StButtons = styled.button`
   cursor: pointer;
   ${(props) =>
@@ -320,7 +347,6 @@ const StButtons = styled.button`
       font-family: georgia;
       color: white;
       cursor: pointer;
-
       &:hover {
         background-color: #1877f2;
       }
@@ -338,7 +364,6 @@ const StButtons = styled.button`
       margin-top: 5px;
       padding-right: 10px;
       font-size: 15px;
-
       cursor: pointer;
     `}
 `;
