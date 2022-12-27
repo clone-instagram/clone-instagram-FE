@@ -7,6 +7,7 @@ export const CommentFormStyle = styled.div`
   margin-top: 0.8rem;
   padding: 0.8rem;
   & > div {
+    width: 80%;
     display: flex;
     align-items: center;
     img {
@@ -15,6 +16,7 @@ export const CommentFormStyle = styled.div`
       height: 28px;
     }
     input {
+      width: 80%;
       :focus {
         outline: none;
       }

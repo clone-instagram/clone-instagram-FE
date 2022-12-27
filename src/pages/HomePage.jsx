@@ -12,8 +12,7 @@ import PostList from '.././components/PostList';
 export default function HomePage() {
   const dispatch = useDispatch();
   const { status, postList, inputField } = useSelector((state) => state.commentReducer);
-  // const { content } = inputField;
-  console.log(inputField);
+  const { content } = inputField[0];
 
   useEffect(() => {
     dispatch(fetchGetPosts());
@@ -28,7 +27,7 @@ export default function HomePage() {
   };
 
   const handleClickPostComment = (postId) => {
-    // content ? dispatch(fetchAddComment({ id: postId, content })) : alert('댓글을 입력해주세요!');
+    content ? dispatch(fetchAddComment({ id: postId, content })) : alert('댓글을 입력해주세요!');
   };
 
   return (
@@ -38,14 +37,12 @@ export default function HomePage() {
         <>
           <TopNavBar />
           {postList.length !== 0 ? (
-            <>
-              <PostList
-                posts={postList}
-                inputField={inputField}
-                onChangeInputField={handleChangeInputField}
-                onClickPostComment={handleClickPostComment}
-              />
-            </>
+            <PostList
+              posts={postList}
+              inputField={inputField}
+              onChangeInputField={handleChangeInputField}
+              onClickPostComment={handleClickPostComment}
+            />
           ) : (
             {
               /*toDo exception*/

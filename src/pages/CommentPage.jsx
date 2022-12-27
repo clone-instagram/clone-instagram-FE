@@ -16,13 +16,11 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const {
     status,
-    postList,
     inputField,
     inputField: { content },
     currPost,
   } = useSelector((state) => state.commentReducer);
 
-  // ToDo fetchGetPosts를 fetchGetPost로 대체하라
   useEffect(() => {
     dispatch(fetchGetPost(id));
   }, [dispatch]);
@@ -44,14 +42,12 @@ export default function HomePage() {
       {status === 'success' ? (
         <>
           <TopNavBar />
-          {postList.length !== 0 ? (
-            <CommentList
-              currPost={currPost}
-              inputField={inputField}
-              onChangeInputField={handleChangeInputField}
-              onClickPostComment={handleClickPostComment}
-            />
-          ) : null}
+          <CommentList
+            currPost={currPost}
+            inputField={inputField}
+            onChangeInputField={handleChangeInputField}
+            onClickPostComment={handleClickPostComment}
+          />
         </>
       ) : null}
     </>

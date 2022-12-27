@@ -29,8 +29,8 @@ export default function PostList({ posts, inputField, onChangeInputField, onClic
                 <p>{post.content}</p>
               </div>
               <div className="comment-content">
-                {post.commentList && post.commentList.length !== 0 ? (
-                  <Link to={`/comment/${post.id}`}>{`댓글 ${post.commentList.length}개 모두 보기`}</Link>
+                {post.commentResponseList && post.commentResponseList.length !== 0 ? (
+                  <Link to={`/comment/${post.id}`}>{`댓글 ${post.commentResponseList.length}개 모두 보기`}</Link>
                 ) : null}
                 <span>{timeCalculator(post.createdAt)}</span>
               </div>
