@@ -6,7 +6,7 @@ import { useInput } from "../lib/utils/useInput";
 import insta from "../assets/images/instaImage.png";
 import logo from "../assets/images/instaLogo.png";
 import line from "../assets/images/loginLine.png";
-// import kakao from "../assets/images/kakao.png";
+import kakao from "../assets/images/kakao.png";
 
 const PostLoginPage = () => {
   const url1 =
@@ -32,7 +32,7 @@ const PostLoginPage = () => {
       localStorage.setItem("id", res.headers.authorization);
       localStorage.setItem("username", res.data.data.username);
       // localStorage.setItem("profileUrl", res.data.data.profileUrl);
-      navigate("/main");
+      navigate("/home");
     });
   };
   return (
@@ -70,7 +70,13 @@ const PostLoginPage = () => {
             <div>
               <img src={line} alt="" />
             </div>
-            {/* <KakaoBtn kakao href="">카카오 로그인</KakaoBtn> */}
+            <KakaoBtn
+              kakao
+              href="https://kauth.kakao.com/oauth/authorize?client_id=ced49bfdb65f5f152e2e43f12e88bd86&redirect_uri=https://sparta-hippo.shop/api/user/kakao/callback&response_type=code"
+            >
+              <KakaoDiv src={kakao} />
+              카카오 로그인
+            </KakaoBtn>
           </StRightBox2>
           <StRightBox3>
             <div>
@@ -238,27 +244,37 @@ const StImgButtons = styled.button`
   margin-left: 10px;
   cursor: pointer;
 `;
+const KakaoDiv = styled.img`
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  margin-right: 10px;
+`;
 
-// const KakaoBtn = styled.button`
-//   ${(props) =>
-//     props.kakao &&
-//     css`
-//       margin: 15px 40px;
-//       width: 280px;
-//       height: 37px;
-//       border: 0;
-//       font-size: 17px;
-//       font-weight: bold;
-//       border-radius: 10px;
-//       background-color: #0095f6;
-//       font-family: georgia;
-//       color: white;
-//       cursor: pointer;
-//       &:hover {
-//         background-color: #1877f2;
-//       }
-//     `}
-// `;
+const KakaoBtn = styled.a`
+  ${(props) =>
+    props.kakao &&
+    css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 40px;
+      padding-right: 20px;
+      width: 280px;
+      height: 37px;
+      border: 0;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 10px;
+      background-color: #ffff00;
+      font-family: georgia;
+      color: black;
+      cursor: pointer;
+      &:hover {
+        background-color: #fee500;
+      }
+    `}
+`;
 
 // const StButton = styled.button`
 //   margin: 15px 40px;
