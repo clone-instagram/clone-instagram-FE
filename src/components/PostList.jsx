@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import CommentForm from "./CommentForm";
+import CommentForm from "./common/CommentForm";
 import UserInfo from "./UserInfo";
 import Icons from "./Icons";
 
@@ -35,9 +35,9 @@ export default function PostList({
               </div>
               <div className="comment-content">
                 {post.commentList && post.commentList.length !== 0 ? (
-                  <Link to={`/comment/${post.id}`}>
-                    {`댓글 ${post.commentList.length}개 모두 보기`}
-                  </Link>
+                  <Link
+                    to={`/comment/${post.id}`}
+                  >{`댓글 ${post.commentList.length}개 모두 보기`}</Link>
                 ) : null}
                 <span>{timeCalculator(post.createdAt)}</span>
               </div>
