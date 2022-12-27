@@ -115,6 +115,7 @@ const PostSignUpPage = () => {
               </a>
             </StP>
             <StButton log>가입</StButton>
+            {/* <UserInfoStyle></UserInfoStyle> */}
           </StRightBox2>
           <StRightBox3>
             <div>
@@ -209,7 +210,7 @@ const StRightBox1 = styled.div`
 const StRightBox2 = styled.div`
   background-color: white;
   width: 350px;
-  height: 550px;
+  height: 600px;
   align-items: center;
   border: 1px solid #dbdbdb;
   border-radius: 1px;
@@ -303,6 +304,32 @@ const StP = styled.p`
   font-size: 12px;
   text-align: center;
 `;
+
+// const UserInfoStyle = styled.div`
+//   display: flex;
+
+//   padding: 0.8rem;
+//   border-bottom: 1px solid #d6d6d6;
+//   button {
+//     background-color: #fff;
+//     color: #000;
+//   }
+//   div {
+//     display: flex;
+//     align-items: center;
+//     img {
+//       margin-right: 12px;
+//       border: 1px solid #d6d6d6;
+//       width: 48px;
+//       height: 48px;
+//       border-radius: 24px;
+//     }
+//     span {
+//       font-weight: 500;
+//       font-size: 16px;
+//     }
+//   }
+// `;
 
 const StButtons = styled.button`
   cursor: pointer;

@@ -28,7 +28,7 @@ const PostPostPage = () => {
     console.log(file);
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImageUrl(reader.result);
+      setImgUrl(reader.result);
       // const image = reader.result;
       setPosts({
         ...posts,
@@ -39,7 +39,7 @@ const PostPostPage = () => {
   };
   // // console.log(imageUrl);
   const [imagefile, setImageFile] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
   const [content, setContent] = useState("");
   const [posts, setPosts] = useState([]);
 
@@ -103,7 +103,7 @@ const PostPostPage = () => {
             <Button add>공유하기</Button>
           </StTopBar>
         </div>
-        <StLeftBox alt="" src={imageUrl ? imageUrl : white}></StLeftBox>
+        <StLeftBox alt="" src={imgUrl ? imgUrl : white}></StLeftBox>
         <StRightBox>
           <StUserBox>
             {/* <img src={localStorage.getItem("profileUrl")}></img> */}

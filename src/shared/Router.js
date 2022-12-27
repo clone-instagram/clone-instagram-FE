@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PostPostPage from "../pages/PostPostPage";
 import PostLoginPage from "../pages/PostLoginPage";
 import PostSignUpPage from "../pages/PostSignUpPage";
+import PostEditPage from "../pages/PostEditPadge";
 // import PostEditPage from "../pages/PostEditPadge";
 
 const Router = () => {
@@ -17,7 +18,7 @@ const Router = () => {
         <Route path="login" element={<PostLoginPage />} />
         <Route path="signup" element={<PostSignUpPage />} />
         <Route path="posts" element={<PostPostPage />} />
-        {/* <Route path="edit" element={<PostEditPage />} /> */}
+        <Route path="edit/:id" element={<PostEditPage />} />
       </Routes>
     </BrowserRouter>
   );
