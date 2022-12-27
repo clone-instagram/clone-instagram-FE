@@ -1,15 +1,13 @@
-import CommentForm from './CommentForm';
-import UserInfo from './UserInfo';
-import Icons from './Icons';
+import CommentForm from './common/CommentForm';
+import UserInfo from './common/UserInfo';
+import Icons from './common/Icons';
 
 import { timeCalculator } from '.././utils/utils';
 
 import { CommentListStyle } from '../styles/CommentListStyle';
 import tmp from '.././assets/tmp.png';
 
-export default function CommentList({
-  currPost, inputField, onChangeInputField, onClickPostComment
-}) {
+export default function CommentList({ currPost, inputField, onChangeInputField, onClickPostComment }) {
   return (
     <CommentListStyle>
       <div>
