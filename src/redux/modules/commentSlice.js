@@ -8,7 +8,7 @@ import {
   fetchDeletePost,
   fetchEditPost,
   fetchAddPost,
-  fetchAddComment
+  fetchAddComment,
 } from '../middleware/thunk';
 
 export const comment = createSlice({
@@ -19,19 +19,18 @@ export const comment = createSlice({
     postList: [],
     currPost: {},
     setImgUrl: '',
-    inputField: [{
-      id: null,
-      content: '',
-    }],
+    inputField: [
+      {
+        id: null,
+        content: '',
+      },
+    ],
   },
   reducers: {
     changeInputField: (state, { payload: { id, value, postId } }) => {
       return {
         ...state,
-        inputField: [{
-          id: postId,
-          [id]: value
-        }],
+        inputField: [{ id: postId, [id]: value }],
       };
     },
     clearAll: (state) => {
@@ -52,11 +51,11 @@ export const comment = createSlice({
     setMessage: (state, { payload: actions }) => {
       return {
         ...state,
-        alert: actions
+        alert: actions,
       };
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(fetchGetPosts.pending, (state) => {
         return {
@@ -70,13 +69,23 @@ export const comment = createSlice({
           status: 'error',
         };
       })
-      .addCase(fetchGetPosts.fulfilled, (state, { payload: { data: { postList } } }) => {
-        return {
-          ...state,
-          status: 'success',
-          postList
-        };
-      })
+      .addCase(
+        fetchGetPosts.fulfilled,
+        (
+          state,
+          {
+            payload: {
+              data: { postList },
+            },
+          }
+        ) => {
+          return {
+            ...state,
+            status: 'success',
+            postList,
+          };
+        }
+      )
       .addCase(fetchGetPost.pending, (state) => {
         return {
           ...state,
@@ -93,7 +102,7 @@ export const comment = createSlice({
         return {
           ...state,
           status: 'success',
-          currPost: { ...payload }
+          currPost: { ...payload },
         };
       })
       .addCase(fetchEditPost.pending, (state) => {
@@ -199,12 +208,10 @@ export const comment = createSlice({
           status: 'success',
         };
       });
-  }
+  },
 });
 
-export const {
-  changeInputField, clearAll, setMessage
-} = comment.actions;
+export const { changeInputField, clearAll, setMessage } = comment.actions;
 
 const commentReducer = comment.reducer;
 export default commentReducer;

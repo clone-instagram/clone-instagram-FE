@@ -44,7 +44,7 @@ export default function TopNavBar() {
           <Link to="#">
             <img src={share} />
           </Link>
-          <Link to="/post">
+          <Link to="/posts">
             <img src={add} />
           </Link>
           <Link to="#">

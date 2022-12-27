@@ -1,15 +1,14 @@
-import CommentForm from './CommentForm';
-import UserInfo from './UserInfo';
-import Icons from './Icons';
+import CommentForm from './common/CommentForm';
+import UserInfo from './common/UserInfo';
+import Icons from './common/Icons';
 
 import { timeCalculator } from '.././utils/utils';
 
 import { CommentListStyle } from '../styles/CommentListStyle';
 import tmp from '.././assets/tmp.png';
+import UserContent from './common/UserContent';
 
-export default function CommentList({
-  currPost, inputField, onChangeInputField, onClickPostComment
-}) {
+export default function CommentList({ currPost, inputField, onChangeInputField, onClickPostComment }) {
   return (
     <CommentListStyle>
       <div>
@@ -17,14 +16,11 @@ export default function CommentList({
           <img src={currPost.imgUrl} />
         </div>
         <div className="content">
-          <UserInfo postUsername={currPost.username} />
+          <UserInfo postUsername={currPost.username} postProfileUrl={currPost.profileUrl} />
           <div className="user-content">
             <img src={tmp} />
             <div>
-              <div>
-                <span>{currPost.username}</span>
-                <p>{currPost.content}</p>
-              </div>
+              <UserContent currPost={currPost} />
               <span className="time">{timeCalculator(currPost.createdAt)}</span>
             </div>
           </div>
