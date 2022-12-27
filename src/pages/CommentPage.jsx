@@ -5,26 +5,26 @@ import { changeInputField } from '../redux/modules/commentSlice';
 
 import { useParams } from 'react-router-dom';
 
-import { fetchGetPosts, fetchAddComment } from '../redux/middleware/thunk';
+import { fetchGetPost, fetchAddComment } from '../redux/middleware/thunk';
 
 import TopNavBar from '.././components/common/TopNavBar';
 import ExceptionPage from './ExceptionPage';
 import CommentList from '.././components/CommentList';
 
 export default function HomePage() {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const {
     status,
     postList,
     inputField,
     inputField: { content },
+    currPost,
   } = useSelector((state) => state.commentReducer);
 
-  const { id } = useParams();
-  const currPost = postList.find((post) => post.id === +id);
-
+  // ToDo fetchGetPosts를 fetchGetPost로 대체하라
   useEffect(() => {
-    dispatch(fetchGetPosts());
+    dispatch(fetchGetPost(id));
   }, [dispatch]);
 
   const handleChangeInputField = (event) => {
@@ -45,19 +45,13 @@ export default function HomePage() {
         <>
           <TopNavBar />
           {postList.length !== 0 ? (
-            <>
-              <CommentList
-                currPost={currPost}
-                inputField={inputField}
-                onChangeInputField={handleChangeInputField}
-                onClickPostComment={handleClickPostComment}
-              />
-            </>
-          ) : (
-            {
-              /*toDo exception*/
-            }
-          )}
+            <CommentList
+              currPost={currPost}
+              inputField={inputField}
+              onChangeInputField={handleChangeInputField}
+              onClickPostComment={handleClickPostComment}
+            />
+          ) : null}
         </>
       ) : null}
     </>
