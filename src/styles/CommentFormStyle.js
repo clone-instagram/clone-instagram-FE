@@ -7,12 +7,16 @@ export const CommentFormStyle = styled.div`
   margin-top: 0.8rem;
   padding: 0.8rem;
   & > div {
-    label {
+    display: flex;
+    align-items: center;
+    img {
       margin-right: 8px;
+      width: 28px;
+      height: 28px;
     }
     input {
       :focus {
-      outline: none;
+        outline: none;
       }
     }
   }
@@ -22,7 +26,7 @@ export const CommentFormStyle = styled.div`
     font-size: 14px;
     font-weight: 500;
     :hover {
-      color: #0099FF;
+      color: #0099ff;
     }
   }
 `;

@@ -1,8 +1,8 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 
-import commentReducer from '../modules/postSlice';
-import post from '../modules/postSlice';
-import comment from '../modules/commentSlice';
+import commentReducer from "../modules/commentSlice";
+import post from "../modules/postSlice";
+import comment from "../modules/commentSlice";
 
 const store = configureStore({
   reducer: { commentReducer, post, comment },

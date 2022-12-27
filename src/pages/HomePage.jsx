@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeInputField } from '../redux/modules/postSlice';
+import { changeInputField } from '../redux/modules/commentSlice';
 
 import {
   fetchGetPosts, fetchAddComment
@@ -15,15 +15,15 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const {
     status, postList, inputField, inputField: { content }
-  } = useSelector((state) => state.postReducer);
+  } = useSelector((state) => state.commentReducer);
 
   useEffect(() => {
     dispatch(fetchGetPosts());
   }, [dispatch]);
 
-  const handleChangeInputField = (event) => {
+  const handleChangeInputField = (event, postId) => {
     const { target: { id, value } } = event;
-    dispatch(changeInputField({ id, value }));
+    dispatch(changeInputField({ id, value, postId }));
   };
 
   const handleClickPostComment = (postId) => {

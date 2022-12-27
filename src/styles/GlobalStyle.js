@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+import { createGlobalStyle } from 'styled-components';
 
+export const GlobalStyle = createGlobalStyle`
 /* reset */
 * {
   margin: 0;
@@ -8,20 +9,17 @@
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
-  font-family: 'Noto Sans KR', sans-serif;
 }
-
 a {
   color: #000;
-}
-
-a:visited {
+  :visited {
   color: #000;
   flex-direction: column;
 }
-
+}
 button {
-  color: #fff;
+  background-color: #fff;
   cursor: pointer;
   font-size: 18px;
 }
+`;
