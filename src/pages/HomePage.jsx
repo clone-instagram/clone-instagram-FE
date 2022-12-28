@@ -9,7 +9,7 @@ import PostList from '.././components/PostList';
 
 export default function HomePage() {
   const dispatch = useDispatch();
-  const { status, postList } = useSelector((state) => state.commentReducer);
+  const { status, postList, isNextPosts } = useSelector((state) => state.commentReducer);
 
   useEffect(() => {
     dispatch(fetchGetPosts());
@@ -22,19 +22,17 @@ export default function HomePage() {
 
   return (
     <>
-      <ExceptionPage status={status} />
-      {status === 'success' ? (
-        <>
-          <TopNavBar />
-          {postList.length !== 0 ? (
-            <PostList posts={postList} onClickPostComment={handleClickPostComment} />
-          ) : (
-            {
-              /*toDo exception*/
-            }
-          )}
-        </>
-      ) : null}
+      {/* <ExceptionPage status={status} /> */}
+      {/* {status === 'success' ? ( */}
+      <>
+        <TopNavBar />
+        {postList?.length !== 0 ? (
+          <PostList posts={postList} onClickPostComment={handleClickPostComment} isNextPosts={isNextPosts} />
+        ) : (
+          <></>
+        )}
+      </>
+      {/* ) : null} */}
     </>
   );
 }
