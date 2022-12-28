@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { apis } from "../lib/axios";
-import Button from "../components/button/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { __addPost } from "../redux/modules/postSlice";
-import white from "../assets/images/white.png";
-import InputEmojiWithRef from "react-input-emoji";
+import React, { useState, useRef, useEffect } from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { apis } from '../lib/axios';
+import Button from '../components/button/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { __addPost } from '../redux/modules/postSlice';
+import white from '../assets/images/white.png';
+// import InputEmojiWithRef from 'react-input-emoji';
 // import EmojiPicker from "emoji-picker-react";
 
 // import axios from "axios";
@@ -16,7 +16,7 @@ const PostPostPage = () => {
 
   const post = useSelector((state) => state.post);
 
-  console.log("posts???", post);
+  console.log('posts???', post);
 
   // const [imageUrl, setImageUrl] = useState(null);
   const imgRef = useRef();
@@ -41,9 +41,9 @@ const PostPostPage = () => {
     };
   };
   // // console.log(imageUrl);
-  const [imagefile, setImageFile] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
-  const [content, setContent] = useState("");
+  const [imagefile, setImageFile] = useState('');
+  const [imgUrl, setImgUrl] = useState('');
+  const [content, setContent] = useState('');
   const [posts, setPosts] = useState([]);
 
   function handleOnEnter(content) {}
@@ -74,15 +74,15 @@ const PostPostPage = () => {
   const onSubmitHandler = () => {
     // console.log(content);
     const formdata = new FormData();
-    formdata.append("file", imagefile);
-    formdata.append("content", content.content);
+    formdata.append('file', imagefile);
+    formdata.append('content', content.content);
     console.log(formdata);
     console.log(typeof formdata);
 
     dispatch(__addPost(formdata));
 
     for (const pair of formdata) {
-      console.log(pair[0] + ", " + pair[1]);
+      console.log(pair[0] + ', ' + pair[1]);
     }
   };
 
@@ -92,7 +92,7 @@ const PostPostPage = () => {
         onSubmit={(e) => {
           e.preventDefault();
           onSubmitHandler(posts);
-          navigate("/home");
+          navigate('/home');
         }}
       >
         <div>
@@ -100,7 +100,7 @@ const PostPostPage = () => {
             <Button
               back
               onClick={() => {
-                navigate("/home");
+                navigate('/home');
               }}
             />
             <StH>새 게시물 만들기</StH>
@@ -110,8 +110,8 @@ const PostPostPage = () => {
         <StLeftBox alt="" src={imgUrl ? imgUrl : white}></StLeftBox>
         <StRightBox>
           <StUserBox>
-            <StProfile src={localStorage.getItem("profileUrl")}></StProfile>
-            <p>{localStorage.getItem("username")}</p>
+            <StProfile src={localStorage.getItem('profileUrl')}></StProfile>
+            <p>{localStorage.getItem('username')}</p>
             {/* <p>{localStorage.getItem("profileUrl")}</p> */}
           </StUserBox>
           <StPostBox
@@ -132,9 +132,7 @@ const PostPostPage = () => {
               });
             }}
           ></StPostBox>
-          <StImogeBox>
-            <InputEmojiWithRef />
-          </StImogeBox>
+          <StImogeBox>{/* <InputEmojiWithRef /> */}</StImogeBox>
           <input
             type="file"
             ref={imgRef}
