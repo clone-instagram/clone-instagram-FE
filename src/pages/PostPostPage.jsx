@@ -6,6 +6,9 @@ import Button from "../components/button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { __addPost } from "../redux/modules/postSlice";
 import white from "../assets/images/white.png";
+import InputEmojiWithRef from "react-input-emoji";
+// import EmojiPicker from "emoji-picker-react";
+
 // import axios from "axios";
 
 const PostPostPage = () => {
@@ -43,6 +46,7 @@ const PostPostPage = () => {
   const [content, setContent] = useState("");
   const [posts, setPosts] = useState([]);
 
+  function handleOnEnter(content) {}
   // const setFile = (e) => {};
 
   // const setFileImage = (event) => {
@@ -72,7 +76,6 @@ const PostPostPage = () => {
     const formdata = new FormData();
     formdata.append("file", imagefile);
     formdata.append("content", content.content);
-
     console.log(formdata);
     console.log(typeof formdata);
 
@@ -82,13 +85,14 @@ const PostPostPage = () => {
       console.log(pair[0] + ", " + pair[1]);
     }
   };
+
   return (
     <StContainer>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           onSubmitHandler(posts);
-          navigate("/main");
+          navigate("/home");
         }}
       >
         <div>
@@ -96,7 +100,7 @@ const PostPostPage = () => {
             <Button
               back
               onClick={() => {
-                navigate("/main");
+                navigate("/home");
               }}
             />
             <StH>새 게시물 만들기</StH>
@@ -106,7 +110,7 @@ const PostPostPage = () => {
         <StLeftBox alt="" src={imgUrl ? imgUrl : white}></StLeftBox>
         <StRightBox>
           <StUserBox>
-            {/* <img src={localStorage.getItem("profileUrl")}></img> */}
+            <StProfile src={localStorage.getItem("profileUrl")}></StProfile>
             <p>{localStorage.getItem("username")}</p>
             {/* <p>{localStorage.getItem("profileUrl")}</p> */}
           </StUserBox>
@@ -128,7 +132,9 @@ const PostPostPage = () => {
               });
             }}
           ></StPostBox>
-          <StImogeBox></StImogeBox>
+          <StImogeBox>
+            <InputEmojiWithRef />
+          </StImogeBox>
           <input
             type="file"
             ref={imgRef}
@@ -264,6 +270,14 @@ const StImogeBox = styled.div`
   height: 40px;
   border-bottom: 1px solid #dbdbdb;
   border-top: 1px solid #dbdbdb;
+`;
+
+const StProfile = styled.img`
+  margin-right: 12px;
+  width: 35px;
+  height: 35px;
+  border-radius: 30px;
+  background-color: pink;
 `;
 
 const StPostBox = styled.textarea`

@@ -1,7 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import styled, { css } from "styled-components";
 import { __postLogin } from "../redux/modules/loginSlice";
 import { useInput } from "../lib/utils/useInput";
+
 // import StButton from "../components/button/Button";
 import insta from "../assets/images/instagif.gif";
 import logo from "../assets/images/instaLogo.png";
@@ -31,10 +33,42 @@ const PostLoginPage = () => {
       }
       localStorage.setItem("id", res.headers.authorization);
       localStorage.setItem("username", res.data.data.username);
-      // localStorage.setItem("profileUrl", res.data.data.profileUrl);
+      localStorage.setItem("profileUrl", res.data.data.profileUrl);
       navigate("/home");
     });
   };
+
+  // const onKakaoLogin = (e) => {
+  //   e.preventDefault();
+  //   __postLogin({}).then((res) => {
+  //     console.log("res:::::", res);
+  //     if (res.data.statusCode === 200) {
+  //       alert(res.data.statusMsg);
+  //     }
+  //     localStorage.setItem("id", res.headers.authorization);
+  //     localStorage.setItem("username", res.data.data.username);
+  //     // localStorage.setItem("profileUrl", res.data.data.profileUrl);
+  //     navigate("/home");
+  //   });
+  // };
+  // function KakaoLogin() {
+  //   const location = useLocation();
+  //   const navigate = useNavigate();
+  //   const KAKAO_CODE = location.search.split("=")[1];
+
+  //   const IP = `localhost:3000`;
+
+  //   useEffect(() => {
+  //     fetch(`http://${IP}/api/users/kakao/redirect?code=${KAKAO_CODE}`, {
+  //       metghod: "GET",
+  //     })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         localStorage.setItem("token", data.token);
+  //         navigate("/home");
+  //       });
+  //   }, []);
+  // }
 
   return (
     <StContainer onSubmit={onSubmitLogin}>
@@ -71,13 +105,15 @@ const PostLoginPage = () => {
             <div>
               <img src={line} alt="" />
             </div>
+            {/* <div onSubmit={KakaoLogin}> */}
             <KakaoBtn
               kakao
-              href="https://kauth.kakao.com/oauth/authorize?client_id=ced49bfdb65f5f152e2e43f12e88bd86&redirect_uri=https://sparta-hippo.shop/api/user/kakao/callback&response_type=code"
+              href="https://kauth.kakao.com/oauth/authorize?client_id=ced49bfdb65f5f152e2e43f12e88bd86&redirect_uri=http://localhost:3000/api/user/kakao/callback&response_type=code"
             >
               <KakaoDiv src={kakao} />
               카카오 로그인
             </KakaoBtn>
+            {/* </div> */}
           </StRightBox2>
           <StRightBox3>
             <div>

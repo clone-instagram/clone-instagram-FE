@@ -1,12 +1,13 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // import HomePage from "../pages/HomePage";
 // import DetailPage from "../pages/DetailPage";
-import PostPostPage from '../pages/PostPostPage';
-import PostLoginPage from '../pages/PostLoginPage';
-import PostSignUpPage from '../pages/PostSignUpPage';
-import PostEditPage from '../pages/PostEditPadge';
+import PostPostPage from "../pages/PostPostPage";
+import PostLoginPage from "../pages/PostLoginPage";
+import PostSignUpPage from "../pages/PostSignUpPage";
+import PostEditPage from "../pages/PostEditPadge";
+// import KakaoLogin from "../pages/KakaoLogin";
 // import PostEditPage from "../pages/PostEditPadge";
 
 const Router = () => {
@@ -19,6 +20,7 @@ const Router = () => {
         <Route path="/signup" element={<PostSignUpPage />} />
         <Route path="/posts" element={<PostPostPage />} />
         <Route path="/edit/:id" element={<PostEditPage />} />
+        {/* <Route path="/api/user/kakao/callback" element={<KakaoLogin />} /> */}
       </Routes>
     </BrowserRouter>
   );
