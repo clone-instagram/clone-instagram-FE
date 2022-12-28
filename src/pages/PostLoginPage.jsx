@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { __postLogin } from "../redux/modules/loginSlice";
 import { useInput } from "../lib/utils/useInput";
 // import StButton from "../components/button/Button";
-import insta from "../assets/images/instaImage.png";
+import insta from "../assets/images/instagif.gif";
 import logo from "../assets/images/instaLogo.png";
 import line from "../assets/images/loginLine.png";
 import kakao from "../assets/images/kakao.png";
@@ -26,8 +26,8 @@ const PostLoginPage = () => {
       password,
     }).then((res) => {
       console.log("res:::::", res);
-      if (res.statusCode === 200) {
-        alert(res.statusMsg);
+      if (res.data.statusCode === 200) {
+        alert(res.data.statusMsg);
       }
       localStorage.setItem("id", res.headers.authorization);
       localStorage.setItem("username", res.data.data.username);
@@ -35,11 +35,12 @@ const PostLoginPage = () => {
       navigate("/home");
     });
   };
+
   return (
     <StContainer onSubmit={onSubmitLogin}>
       <div>
         <StLeftBox>
-          <img src={insta} alt="" width={380} height={580} />
+          <img src={insta} alt="" width={400} height={580} />
         </StLeftBox>
         <StRightBox1>
           <StRightBox2>
@@ -261,11 +262,11 @@ const KakaoBtn = styled.a`
       margin: 10px 40px;
       padding-right: 20px;
       width: 280px;
-      height: 37px;
+      height: 33px;
       border: 0;
       font-size: 18px;
       font-weight: bold;
-      border-radius: 10px;
+      border-radius: 8px;
       background-color: #ffff00;
       font-family: georgia;
       color: black;
@@ -302,11 +303,11 @@ const StButton = styled.button`
     css`
       margin: 15px 40px;
       width: 280px;
-      height: 37px;
+      height: 33px;
       border: 0;
       font-size: 17px;
       font-weight: bold;
-      border-radius: 10px;
+      border-radius: 8px;
       background-color: #0095f6;
       font-family: georgia;
       color: white;
