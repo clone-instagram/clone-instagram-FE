@@ -22,6 +22,12 @@ export const getPosts = async () => {
   return response.data;
 };
 
+// 다음 게시글 전체 조회
+export const getNextPosts = async (pageSize) => {
+  const response = await baseURL.get(POSTS + `?size=${pageSize}&search=`);
+  return response.data;
+};
+
 // 단일 게시글 조회
 export const getPost = async (postId) => {
   const response = await baseURL.get(POSTS + `/${postId}`);

@@ -22,7 +22,7 @@ export const UserInfoStyle = styled.div`
     display: flex;
     align-items: center;
     span {
-      font-weight: 500;
+      font-weight: 700;
       font-size: 16px;
     }
     .profile-img {

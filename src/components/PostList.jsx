@@ -1,3 +1,5 @@
+import Lottie from 'lottie-react';
+
 import { Link } from 'react-router-dom';
 
 import CommentForm from './common/CommentForm';
@@ -9,13 +11,19 @@ import { timeCalculator } from '.././utils/utils';
 import { PostListStyle } from '../styles/PostListStyle';
 import UserContent from './common/UserContent';
 
+import loadingGray from '.././assets/loadingGray.json';
+
+import useInfiniteScroll from '../hooks/useInfiniteScroll';
+
 export default function PostList({ posts, onClickPostComment }) {
+  const { listRef } = useInfiniteScroll(posts);
+
   return (
     <PostListStyle>
-      <ul>
+      <ul ref={listRef}>
         {posts.map((post) => (
           <li key={post.id}>
-            <UserInfo postUsername={post.username} />
+            <UserInfo postUsername={post.username} postProfileUrl={post.profileUrl} />
             <div className="post-img">
               <img src={post.imgUrl} />
             </div>
@@ -36,6 +44,7 @@ export default function PostList({ posts, onClickPostComment }) {
             <CommentForm postId={post.id} onClickPostComment={onClickPostComment} />
           </li>
         ))}
+        <Lottie className="loading" animationData={loadingGray} />
       </ul>
     </PostListStyle>
   );

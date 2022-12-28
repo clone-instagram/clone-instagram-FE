@@ -8,6 +8,12 @@ export const PostListStyle = styled.div`
     width: 30%;
     margin: 0 auto;
     padding-bottom: 1rem;
+    .loading {
+      width: 50px;
+      height: 50px;
+      width: 30%;
+      margin: 30px auto;
+    }
     li {
       border-radius: 8px;
       border: 1px solid #d6d6d6;

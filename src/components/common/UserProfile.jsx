@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import tmp from '../.././assets/tmp.png';
+import default_user from '../../assets/default_user.jpeg';
 
 const UserProfileStyle = styled.div`
   margin-right: 12px;
@@ -15,7 +15,7 @@ const UserProfileStyle = styled.div`
 export default function UserProfile({ postProfileUrl }) {
   return (
     <UserProfileStyle>
-      <img src={postProfileUrl ? postProfileUrl : tmp} />
+      <img src={postProfileUrl ? postProfileUrl : default_user} />
     </UserProfileStyle>
   );
 }

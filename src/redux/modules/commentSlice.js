@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchGetPosts, fetchGetPost } from '../middleware/thunk';
+import { fetchGetPosts, fetchNextPosts, fetchGetPost } from '../middleware/thunk';
 
 export const comment = createSlice({
   name: 'comment',
@@ -58,6 +58,13 @@ export const comment = createSlice({
           ...state,
           status: 'success',
           currPost: { ...payload },
+        };
+      })
+      .addCase(fetchNextPosts.fulfilled, (state, { payload: { postList } }) => {
+        return {
+          ...state,
+          status: 'success',
+          postList,
         };
       });
   },

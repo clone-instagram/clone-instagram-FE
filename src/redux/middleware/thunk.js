@@ -1,8 +1,23 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { getPosts, getPost, getSignUp, getSignIn, addPost, deletePost, editPost, addComment } from '../../services/api';
+import {
+  getPosts,
+  getNextPosts,
+  getPost,
+  getSignUp,
+  getSignIn,
+  addPost,
+  deletePost,
+  editPost,
+  addComment,
+} from '../../services/api';
 
 export const fetchGetPosts = createAsyncThunk('india/fetchGetPosts', getPosts);
+
+export const fetchNextPosts = createAsyncThunk('india/fetchNextPosts', async (pageSize) => {
+  const response = await getNextPosts(pageSize);
+  return response.data;
+});
 
 export const fetchGetPost = createAsyncThunk('india/fetchGetPost', async (postId) => {
   const response = await getPost(postId);
