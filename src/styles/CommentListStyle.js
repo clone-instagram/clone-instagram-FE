@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const CommentListStyle = styled.div`
-  padding-top: 5rem;
+  /* padding-top: 5rem; */
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 100vh;
   background-color: #f2f2f2;
@@ -14,15 +16,29 @@ export const CommentListStyle = styled.div`
       font-size: 10px;
       color: rgba(0, 0, 0, 0.4);
     }
-    .img {
+    .post-img {
       img {
-        width: 100%;
-        object-fit: cover;
+        width: 450px;
         height: 600px;
+        object-fit: cover;
       }
     }
     .content {
-      width: 70%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      .scroll-content {
+        overflow-y: scroll;
+        overflow-x: hidden;
+         {
+          /*ToDoAsk 아래 높이 동적으로 받는방법?*/
+        }
+        height: 320px;
+        ::-webkit-scrollbar {
+          display: none;
+        }
+      }
       .like-count {
         padding: 0 0.8rem;
         div {
@@ -31,18 +47,6 @@ export const CommentListStyle = styled.div`
           & > span {
             font-weight: 700;
           }
-        }
-      }
-      .user-content {
-        display: flex;
-        margin: 8px 0;
-        padding: 0.8rem;
-        img {
-          margin-right: 12px;
-          border: 1px solid #d6d6d6;
-          width: 48px;
-          height: 48px;
-          border-radius: 24px;
         }
       }
     }

@@ -5,7 +5,7 @@ export const UserInfoStyle = styled.div`
   justify-content: space-between;
   padding: 0.8rem;
   border-bottom: 1px solid #d6d6d6;
-  button {
+  & > button {
     background-color: #fff;
     color: #000;
     img {
@@ -18,12 +18,18 @@ export const UserInfoStyle = styled.div`
       }
     }
   }
-  div {
+  & > div {
     display: flex;
     align-items: center;
     span {
       font-weight: 500;
       font-size: 16px;
+    }
+    .profile-img {
+      border: 1px solid #d6d6d6;
+      width: 48px;
+      height: 48px;
+      border-radius: 24px;
     }
   }
 `;
