@@ -1,10 +1,19 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { saveItem, loadItem } from './storage';
+import { saveItem, loadItem } from "./storage";
+
 
 const baseURL = axios.create({
-  baseURL: 'http://52.79.64.171',
+  baseURL: "http://52.79.64.171",
   headers: {
+    "Access-Control-Allow-Origin": "*",
+    Authorization: `${loadItem("id")}`,
+  },
+});
+
+const POSTS = "/api/posts"; // 전체 게시글
+const POST = "/api/post"; // 단일 게시글
+const COMMENT = "/api/comment"; // 댓글
     'Access-Control-Allow-Origin': '*',
     Authorization: `${loadItem('id')}`,
   },
@@ -13,8 +22,8 @@ const baseURL = axios.create({
 const POSTS = '/api/posts'; // 전체 게시글
 const POST = '/api/post'; // 단일 게시글
 // const LIKE = '/api/like'; // 좋아요
-const SIGNUP = '/api/user/signup'; // 회원가입
-const LOGIN = '/api/user/login'; // 로그인
+const SIGNUP = "/api/user/signup"; // 회원가입
+const LOGIN = "/api/user/login"; // 로그인
 
 // 게시글 전체 조회
 export const getPosts = async () => {
@@ -43,14 +52,16 @@ export const addComment = async (newComment) => {
 
 // 회원가입
 export const getSignUp = async (userInfo) => {
-  const response = await baseURL.post(SIGNUP, { ...userInfo, adminToken: process.env.REACT_APP_TOKEN }).catch((err) => {
-    const {
-      response: {
-        data: { msg: msg },
-      },
-    } = err;
-    alert(msg);
-  });
+  const response = await baseURL
+    .post(SIGNUP, { ...userInfo, adminToken: process.env.REACT_APP_TOKEN })
+    .catch((err) => {
+      const {
+        response: {
+          data: { msg: msg },
+        },
+      } = err;
+      alert(msg);
+    });
   alert(response.data.msg);
 };
 
@@ -65,14 +76,14 @@ export const getSignIn = async (userInfo) => {
     alert(msg);
   });
   alert(response.data.msg);
-  saveItem('success', response.headers.authorization);
+  saveItem("success", response.headers.authorization);
   return response.data;
 };
 
 // 게시글 작성
 export const addPost = async (newPost) => {
   const response = await baseURL.post(POST, newPost);
-  if (response.status === 200) window.location.assign('/');
+  if (response.status === 200) window.location.assign("/");
 };
 
 // 게시글 수정
@@ -89,5 +100,5 @@ export const editPost = async (editedPost) => {
 // 게시글 삭제
 export const deletePost = async (id) => {
   const response = await baseURL.delete(POST + `/${id}`);
-  if (response.status === 200) window.location.assign('/');
+  if (response.status === 200) window.location.assign("/");
 };

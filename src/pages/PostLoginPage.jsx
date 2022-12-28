@@ -1,12 +1,14 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import styled, { css } from "styled-components";
 import { __postLogin } from "../redux/modules/loginSlice";
 import { useInput } from "../lib/utils/useInput";
+
 // import StButton from "../components/button/Button";
-import insta from "../assets/images/instaImage.png";
+import insta from "../assets/images/instagif.gif";
 import logo from "../assets/images/instaLogo.png";
 import line from "../assets/images/loginLine.png";
-// import kakao from "../assets/images/kakao.png";
+import kakao from "../assets/images/kakao.png";
 
 const PostLoginPage = () => {
   const url1 =
@@ -26,20 +28,53 @@ const PostLoginPage = () => {
       password,
     }).then((res) => {
       console.log("res:::::", res);
-      if (res.statusCode === 200) {
-        alert(res.statusMsg);
+      if (res.data.statusCode === 200) {
+        alert(res.data.statusMsg);
       }
       localStorage.setItem("id", res.headers.authorization);
       localStorage.setItem("username", res.data.data.username);
-      // localStorage.setItem("profileUrl", res.data.data.profileUrl);
-      navigate("/main");
+      localStorage.setItem("profileUrl", res.data.data.profileUrl);
+      navigate("/home");
     });
   };
+
+  // const onKakaoLogin = (e) => {
+  //   e.preventDefault();
+  //   __postLogin({}).then((res) => {
+  //     console.log("res:::::", res);
+  //     if (res.data.statusCode === 200) {
+  //       alert(res.data.statusMsg);
+  //     }
+  //     localStorage.setItem("id", res.headers.authorization);
+  //     localStorage.setItem("username", res.data.data.username);
+  //     // localStorage.setItem("profileUrl", res.data.data.profileUrl);
+  //     navigate("/home");
+  //   });
+  // };
+  // function KakaoLogin() {
+  //   const location = useLocation();
+  //   const navigate = useNavigate();
+  //   const KAKAO_CODE = location.search.split("=")[1];
+
+  //   const IP = `localhost:3000`;
+
+  //   useEffect(() => {
+  //     fetch(`http://${IP}/api/users/kakao/redirect?code=${KAKAO_CODE}`, {
+  //       metghod: "GET",
+  //     })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         localStorage.setItem("token", data.token);
+  //         navigate("/home");
+  //       });
+  //   }, []);
+  // }
+
   return (
     <StContainer onSubmit={onSubmitLogin}>
       <div>
         <StLeftBox>
-          <img src={insta} alt="" width={380} height={580} />
+          <img src={insta} alt="" width={400} height={580} />
         </StLeftBox>
         <StRightBox1>
           <StRightBox2>
@@ -70,7 +105,15 @@ const PostLoginPage = () => {
             <div>
               <img src={line} alt="" />
             </div>
-            {/* <KakaoBtn kakao href="">카카오 로그인</KakaoBtn> */}
+            {/* <div onSubmit={KakaoLogin}> */}
+            <KakaoBtn
+              kakao
+              href="https://kauth.kakao.com/oauth/authorize?client_id=ced49bfdb65f5f152e2e43f12e88bd86&redirect_uri=http://localhost:3000/api/user/kakao/callback&response_type=code"
+            >
+              <KakaoDiv src={kakao} />
+              카카오 로그인
+            </KakaoBtn>
+            {/* </div> */}
           </StRightBox2>
           <StRightBox3>
             <div>
@@ -238,27 +281,37 @@ const StImgButtons = styled.button`
   margin-left: 10px;
   cursor: pointer;
 `;
+const KakaoDiv = styled.img`
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  margin-right: 10px;
+`;
 
-// const KakaoBtn = styled.button`
-//   ${(props) =>
-//     props.kakao &&
-//     css`
-//       margin: 15px 40px;
-//       width: 280px;
-//       height: 37px;
-//       border: 0;
-//       font-size: 17px;
-//       font-weight: bold;
-//       border-radius: 10px;
-//       background-color: #0095f6;
-//       font-family: georgia;
-//       color: white;
-//       cursor: pointer;
-//       &:hover {
-//         background-color: #1877f2;
-//       }
-//     `}
-// `;
+const KakaoBtn = styled.a`
+  ${(props) =>
+    props.kakao &&
+    css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 40px;
+      padding-right: 20px;
+      width: 280px;
+      height: 33px;
+      border: 0;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 8px;
+      background-color: #ffff00;
+      font-family: georgia;
+      color: black;
+      cursor: pointer;
+      &:hover {
+        background-color: #fee500;
+      }
+    `}
+`;
 
 // const StButton = styled.button`
 //   margin: 15px 40px;
@@ -286,11 +339,11 @@ const StButton = styled.button`
     css`
       margin: 15px 40px;
       width: 280px;
-      height: 37px;
+      height: 33px;
       border: 0;
       font-size: 17px;
       font-weight: bold;
-      border-radius: 10px;
+      border-radius: 8px;
       background-color: #0095f6;
       font-family: georgia;
       color: white;

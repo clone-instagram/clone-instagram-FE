@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { __postSignup } from "../redux/modules/loginSlice";
 import { useInput } from "../lib/utils/useInput";
+import kakao from "../assets/images/kakao.png";
 // import Button from "../components/button/Button";
 // import insta from "../assets/images/instaImage.png";
 import logo from "../assets/images/instaLogo.png";
@@ -42,7 +43,10 @@ const PostSignUpPage = () => {
       username,
       password,
     }).then((res) => {
-      console.log("signup res: ", res);
+      console.log("res:", res);
+      if (res.data.statusCode === 200) {
+        alert(res.data.statusMsg);
+      }
       // if (res.data.statusCode === 200) {
       //   alert(res.data.msg);
       // }
@@ -72,7 +76,13 @@ const PostSignUpPage = () => {
             <StH>
               친구들의 사진과 동영상을 보려면<br></br>가입하세요.
             </StH>
-            <StButton>KaKao로 로그인</StButton>
+            <KakaoBtn
+              kakao
+              href="https://kauth.kakao.com/oauth/authorize?client_id=ced49bfdb65f5f152e2e43f12e88bd86&redirect_uri=https://sparta-hippo.shop/api/user/kakao/callback&response_type=code"
+            >
+              <KakaoDiv src={kakao} />
+              카카오 로그인
+            </KakaoBtn>
             <div>
               <img src={line} alt="" />
             </div>
@@ -282,7 +292,7 @@ const StButton = styled.button`
   border: 0;
   font-size: 14px;
   font-weight: bold;
-  border-radius: 10px;
+  border-radius: 8px;
   background-color: #0095f6;
   font-family: georgia;
   color: white;
@@ -300,11 +310,44 @@ const StH = styled.h4`
 `;
 
 const StP = styled.p`
+  margin-top: 20px;
+  margin-bottom: 20px;
   color: #989c98;
   font-size: 12px;
   text-align: center;
 `;
 
+const KakaoDiv = styled.img`
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  margin-right: 10px;
+`;
+
+const KakaoBtn = styled.a`
+  ${(props) =>
+    props.kakao &&
+    css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 40px;
+      padding-right: 20px;
+      width: 280px;
+      height: 33px;
+      border: 0;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 8px;
+      background-color: #ffff00;
+      font-family: georgia;
+      color: black;
+      cursor: pointer;
+      &:hover {
+        background-color: #fee500;
+      }
+    `}
+`;
 // const UserInfoStyle = styled.div`
 //   display: flex;
 
@@ -338,7 +381,7 @@ const StButtons = styled.button`
     css`
       margin: 15px 40px;
       width: 280px;
-      height: 37px;
+      height: 33px;
       border: 0;
       font-size: 17px;
       font-weight: bold;
