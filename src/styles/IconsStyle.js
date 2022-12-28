@@ -8,14 +8,24 @@ export const IconsStyle = styled.div`
   .left-icons {
     img {
       margin-right: 0.8rem;
-      width: 28px;
-      height: 28px;
+      border-radius: 10px;
+      padding: 2px;
+      width: 32px;
+      height: 32px;
+      :hover {
+        background-color: #f2f2f2;
+      }
     }
   }
   .right-icons {
     img {
-      width: 28px;
-      height: 28px;
+      border-radius: 10px;
+      padding: 2px;
+      width: 32px;
+      height: 32px;
+      :hover {
+        background-color: #f2f2f2;
+      }
     }
   }
 `;
