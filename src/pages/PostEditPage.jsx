@@ -92,7 +92,7 @@ const PostEditPage = () => {
         onSubmit={(e) => {
           e.preventDefault();
           onEditHandler(Number(param.id), editposts);
-          navigate("/main");
+          window.location.assign("/home");
         }}
       >
         <div>
@@ -100,7 +100,7 @@ const PostEditPage = () => {
             <Button
               back
               onClick={() => {
-                navigate("/main");
+                window.location.assign("/home");
               }}
             />
             <StH>새 게시물 만들기</StH>
@@ -119,7 +119,7 @@ const PostEditPage = () => {
         </div>
         <StRightBox>
           <StUserBox>
-            {/* <img src={localStorage.getItem("profileUrl")}></img> */}
+            <img src={localStorage.getItem("profileUrl")}></img>
             <p>{localStorage.getItem("username")}</p>
             {/* <p>{localStorage.getItem("profileUrl")}</p> */}
           </StUserBox>
