@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux';
-
 import { Link } from 'react-router-dom';
 
 import { TopNavBarStyle } from '../.././styles/TopNavBarStyle';
@@ -14,17 +12,9 @@ import like from '../../assets/outline-icons/like.svg';
 import signout from '../../assets/outline-icons/signout.svg';
 
 export default function TopNavBar() {
-  // const dispatch = useDispatch();
-  const { status } = useSelector((state) => state.commentReducer);
-
-  // const handleClickBack = () => {
-  //   dispatch(clearAll());
-  //   window.history.back();
-  // };
-
   const handleClickLogout = () => {
-    removeItem(status);
-    window.location.reload();
+    window.location.assign('/');
+    removeItem('id');
   };
 
   return (

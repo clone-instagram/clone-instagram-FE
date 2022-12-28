@@ -2,21 +2,16 @@ import axios from 'axios';
 
 import { saveItem, loadItem } from './storage';
 
-const tmpURL = axios.create({
-  baseURL: 'http://localhost:3003',
-});
-
 const baseURL = axios.create({
   baseURL: 'http://52.79.64.171',
   headers: {
     'Access-Control-Allow-Origin': '*',
-    Authorization: `${loadItem('success')}`,
+    Authorization: `${loadItem('id')}`,
   },
 });
 
 const POSTS = '/api/posts'; // 전체 게시글
 const POST = '/api/post'; // 단일 게시글
-const COMMENT = '/api/comment'; // 댓글
 // const LIKE = '/api/like'; // 좋아요
 const SIGNUP = '/api/user/signup'; // 회원가입
 const LOGIN = '/api/user/login'; // 로그인
@@ -27,10 +22,23 @@ export const getPosts = async () => {
   return response.data;
 };
 
+// 다음 게시글 전체 조회
+export const getNextPosts = async (pageSize) => {
+  const response = await baseURL.get(POSTS + `?size=${pageSize}&search=`);
+  return response.data;
+};
+
 // 단일 게시글 조회
 export const getPost = async (postId) => {
   const response = await baseURL.get(POSTS + `/${postId}`);
   return response.data;
+};
+
+// 댓글 작성
+export const addComment = async (newComment) => {
+  const { id, content } = newComment;
+  const response = await baseURL.post(POSTS + `/${id}` + '/comments', { content });
+  if (response.status === 200) window.location.reload();
 };
 
 // 회원가입
@@ -82,11 +90,4 @@ export const editPost = async (editedPost) => {
 export const deletePost = async (id) => {
   const response = await baseURL.delete(POST + `/${id}`);
   if (response.status === 200) window.location.assign('/');
-};
-
-// 댓글 작성
-export const addComment = async (newComment) => {
-  const { id, content } = newComment;
-  const response = await baseURL.post(COMMENT + `/${id}`, { content });
-  if (response.status === 200) window.location.reload();
 };

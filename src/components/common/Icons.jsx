@@ -10,7 +10,7 @@ import bookmark from '../.././assets/outline-icons/bookmark.svg';
 export default function Icons({ postId, color }) {
   return (
     <IconsStyle color={color}>
-      <div>
+      <div className="left-icons">
         <button type="button">
           <img src={like} />
         </button>
@@ -21,7 +21,7 @@ export default function Icons({ postId, color }) {
           <img src={share} />
         </Link>
       </div>
-      <div>
+      <div className="right-icons">
         <Link to="#">
           <img src={bookmark} />
         </Link>
