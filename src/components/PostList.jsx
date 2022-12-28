@@ -7,6 +7,7 @@ import Icons from './common/Icons';
 import { timeCalculator } from '.././utils/utils';
 
 import { PostListStyle } from '../styles/PostListStyle';
+import UserContent from './common/UserContent';
 
 export default function PostList({ posts, inputField, onChangeInputField, onClickPostComment }) {
   return (
@@ -15,24 +16,21 @@ export default function PostList({ posts, inputField, onChangeInputField, onClic
         {posts.map((post) => (
           <li key={post.id}>
             <UserInfo postUsername={post.username} />
-            <div className="img">
+            <div className="post-img">
               <img src={post.imgUrl} />
             </div>
+            <Icons postId={post.id} />
             <div className="content">
-              <Icons postId={post.id} />
               <div className="like-count">
                 <span>{`${post.likes}명`}</span>
                 <p>이 좋아합니다</p>
               </div>
-              <div className="user-content">
-                <span>{post.username}</span>
-                <p>{post.content}</p>
-              </div>
+              <UserContent currPost={post} props={0} />
               <div className="comment-content">
-                {post.commentResponseList && post.commentResponseList.length !== 0 ? (
+                {post.commentResponseList.length !== 0 ? (
                   <Link to={`/comment/${post.id}`}>{`댓글 ${post.commentResponseList.length}개 모두 보기`}</Link>
                 ) : null}
-                <span>{timeCalculator(post.createdAt)}</span>
+                <span className="time">{timeCalculator(post.createdAt)}</span>
               </div>
             </div>
             <CommentForm
