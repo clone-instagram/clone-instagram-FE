@@ -15,8 +15,9 @@ export default function HomePage() {
     dispatch(fetchGetPosts());
   }, [dispatch]);
 
-  const handleClickPostComment = (postId) => {
-    // content ? dispatch(fetchAddComment({ id: postId, content })) : alert('댓글을 입력해주세요!');
+  // ToDoAsk 반복됨. 커스텀훅으로 분리해야할지?
+  const handleClickPostComment = (postId, content) => {
+    content ? dispatch(fetchAddComment({ id: postId, content })) : alert('댓글을 입력해주세요!');
   };
 
   return (

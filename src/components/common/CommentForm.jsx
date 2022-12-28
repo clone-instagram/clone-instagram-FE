@@ -2,8 +2,6 @@ import EmojiPicker from 'emoji-picker-react';
 
 import useChangeInputField from '../../hooks/useChangeInputField';
 
-// import useChangeInputField from '../../hooks/useChangeInputField';
-
 import { CommentFormStyle } from '../../styles/CommentFormStyle';
 
 import smile from '../.././assets/outline-icons/smile.svg';
@@ -33,7 +31,7 @@ export default function CommentForm({ postId, onClickPostComment }) {
           onChange={(e) => handleChangeInputField(e, postId)}
         />
       </div>
-      <button type="button" onClick={() => onClickPostComment(postId)}>
+      <button type="button" onClick={() => onClickPostComment(postId, inputField[0].content)}>
         게시
       </button>
     </CommentFormStyle>

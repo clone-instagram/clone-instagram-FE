@@ -18,8 +18,8 @@ export default function HomePage() {
     dispatch(fetchGetPost(id));
   }, [dispatch]);
 
-  const handleClickPostComment = (postId) => {
-    // content ? dispatch(fetchAddComment({ id: postId, content })) : alert('댓글을 입력해주세요!');
+  const handleClickPostComment = (postId, content) => {
+    content ? dispatch(fetchAddComment({ id: postId, content })) : alert('댓글을 입력해주세요!');
   };
 
   return (
