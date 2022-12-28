@@ -7,7 +7,7 @@ import { timeCalculator } from '.././utils/utils';
 import { CommentListStyle } from '../styles/CommentListStyle';
 import UserContent from './common/UserContent';
 
-export default function CommentList({ currPost, inputField, onChangeInputField, onClickPostComment }) {
+export default function CommentList({ currPost, onClickPostComment }) {
   return (
     <>
       {Object.keys(currPost).length !== 0 ? (
@@ -35,12 +35,7 @@ export default function CommentList({ currPost, inputField, onChangeInputField, 
                   </div>
                   <span className="time">{timeCalculator(currPost.createdAt)}</span>
                 </div>
-                <CommentForm
-                  postId={currPost.id}
-                  inputField={inputField}
-                  onChangeInputField={onChangeInputField}
-                  onClickPostComment={onClickPostComment}
-                />
+                <CommentForm postId={currPost.id} onClickPostComment={onClickPostComment} />
               </div>
             </div>
           </div>

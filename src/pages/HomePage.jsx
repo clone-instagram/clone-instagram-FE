@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { changeInputField } from '../redux/modules/commentSlice';
-
 import { fetchGetPosts, fetchAddComment } from '../redux/middleware/thunk';
 
 import TopNavBar from '.././components/common/TopNavBar';
@@ -11,23 +9,14 @@ import PostList from '.././components/PostList';
 
 export default function HomePage() {
   const dispatch = useDispatch();
-  const { status, postList, inputField } = useSelector((state) => state.commentReducer);
-  const { content } = inputField[0];
+  const { status, postList } = useSelector((state) => state.commentReducer);
 
   useEffect(() => {
     dispatch(fetchGetPosts());
   }, [dispatch]);
 
-  const handleChangeInputField = (event, postId) => {
-    // toDoAsk 저장하면 자동 줄바꿈됨
-    const {
-      target: { id, value },
-    } = event;
-    dispatch(changeInputField({ id, value, postId }));
-  };
-
   const handleClickPostComment = (postId) => {
-    content ? dispatch(fetchAddComment({ id: postId, content })) : alert('댓글을 입력해주세요!');
+    // content ? dispatch(fetchAddComment({ id: postId, content })) : alert('댓글을 입력해주세요!');
   };
 
   return (
@@ -37,12 +26,7 @@ export default function HomePage() {
         <>
           <TopNavBar />
           {postList.length !== 0 ? (
-            <PostList
-              posts={postList}
-              inputField={inputField}
-              onChangeInputField={handleChangeInputField}
-              onClickPostComment={handleClickPostComment}
-            />
+            <PostList posts={postList} onClickPostComment={handleClickPostComment} />
           ) : (
             {
               /*toDo exception*/

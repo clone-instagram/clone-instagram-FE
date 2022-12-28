@@ -9,7 +9,7 @@ import { timeCalculator } from '.././utils/utils';
 import { PostListStyle } from '../styles/PostListStyle';
 import UserContent from './common/UserContent';
 
-export default function PostList({ posts, inputField, onChangeInputField, onClickPostComment }) {
+export default function PostList({ posts, onClickPostComment }) {
   return (
     <PostListStyle>
       <ul>
@@ -33,12 +33,7 @@ export default function PostList({ posts, inputField, onChangeInputField, onClic
                 <span className="time">{timeCalculator(post.createdAt)}</span>
               </div>
             </div>
-            <CommentForm
-              postId={post.id}
-              inputField={inputField}
-              onChangeInputField={onChangeInputField}
-              onClickPostComment={onClickPostComment}
-            />
+            <CommentForm postId={post.id} onClickPostComment={onClickPostComment} />
           </li>
         ))}
       </ul>
