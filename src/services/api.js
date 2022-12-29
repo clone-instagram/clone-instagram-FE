@@ -38,7 +38,7 @@ export const getPost = async (postId) => {
 export const addComment = async (newComment) => {
   const { id, content } = newComment;
   const response = await baseURL.post(POSTS + `/${id}` + '/comments', { content });
-  if (response.status === 200) window.location.reload();
+  return response.data;
 };
 
 // 회원가입
