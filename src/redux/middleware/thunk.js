@@ -23,6 +23,7 @@ export const fetchGetPost = createAsyncThunk('india/fetchGetPost', async (postId
 export const fetchLikePost = createAsyncThunk('india/fetchLikePost', async (postId, thunkAPI) => {
   await likePost(postId);
   thunkAPI.dispatch(fetchGetPosts());
+  thunkAPI.dispatch(fetchGetPost(postId));
 });
 
 export const fetchAddComment = createAsyncThunk('india/fetchAddComment', async (newComment, thunkAPI) => {

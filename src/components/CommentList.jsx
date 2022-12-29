@@ -27,7 +27,7 @@ export default function CommentList({ currPost }) {
                 ))}
               </div>
               <div>
-                <Icons color="rgba(0, 0, 0, 0.1)" />
+                <Icons post={currPost} color="rgba(0, 0, 0, 0.1)" />
                 <div className="like-count">
                   <div>
                     <span>{`${currPost.likes}명`}</span>
