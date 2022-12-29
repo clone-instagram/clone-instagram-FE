@@ -17,12 +17,12 @@ root.render(
   <QueryClientProvider client={queryClient}>
     {/*Provider를 앱에 제공*/}
     <Provider store={store}>
-      <React.StrictMode>
-        <BrowserRouter>
-          <GlobalStyle />
-          <App />
-        </BrowserRouter>
-      </React.StrictMode>
+      {/* <React.StrictMode> */}
+      <BrowserRouter>
+        <GlobalStyle />
+        <App />
+      </BrowserRouter>
+      {/* </React.StrictMode> */}
     </Provider>
   </QueryClientProvider>
 );

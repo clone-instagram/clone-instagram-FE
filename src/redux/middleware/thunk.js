@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { getPosts, getNextPosts, getPost, likePost, addComment, commentLikePost } from '../../services/api';
+import { getPosts, getNextPosts, getPost, likePost, addComment, commentLikePost, deletePost } from '../../services/api';
 
 export const fetchGetPosts = createAsyncThunk('india/fetchGetPosts', getPosts);
 
@@ -36,4 +36,9 @@ export const fetchAddComment = createAsyncThunk('india/fetchAddComment', async (
   await addComment(newComment);
   thunkAPI.dispatch(fetchGetPosts());
   thunkAPI.dispatch(fetchGetPost(newComment.id));
+});
+
+export const fetchDeletePost = createAsyncThunk('india/fetchDeletePost', async (postId, thunkAPI) => {
+  await deletePost(postId);
+  thunkAPI.dispatch(fetchGetPosts());
 });

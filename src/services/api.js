@@ -35,6 +35,13 @@ export const getPost = async (postId) => {
 // 게시글 좋아요
 export const likePost = async (postId) => {
   const response = await baseURL.post(LIKE_POST + `/${postId}`);
+  console.log(response);
+  return response.data;
+};
+
+// 게시물 삭제
+export const deletePost = async (postId) => {
+  const response = await baseURL.delete(POSTS + `/${postId}`);
   return response.data;
 };
 

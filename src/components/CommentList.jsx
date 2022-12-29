@@ -19,7 +19,7 @@ export default function CommentList({ currPost }) {
             </div>
             <div className="content">
               <div>
-                <UserInfo postUsername={currPost.username} postProfileUrl={currPost.profileUrl} />
+                <UserInfo currPost={currPost} />
               </div>
               <div className="scroll-content">
                 <UserContent currPost={currPost} props={0.8} />

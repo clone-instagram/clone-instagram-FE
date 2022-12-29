@@ -13,7 +13,6 @@ import solid_like from '../.././assets/solid-icons/solid_like.svg';
 
 export default function CommentUserContent({ currPost, props }) {
   const dispatch = useDispatch();
-  console.log(currPost);
 
   // 보통 1줄 즉 줄바꿈 없음일때 0=false
   const lineOfContent = currPost.content.split('\n').length - 1;

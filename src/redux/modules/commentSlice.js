@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchGetPosts, fetchNextPosts, fetchGetPost } from '../middleware/thunk';
+import { fetchGetPosts, fetchNextPosts, fetchGetPost, fetchDeletePost } from '../middleware/thunk';
 
 export const comment = createSlice({
   name: 'comment',
@@ -88,6 +88,18 @@ export const comment = createSlice({
           isNextPosts,
         };
       });
+    // .addCase(fetchDeletePost.rejected, (state) => {
+    //   return {
+    //     ...state,
+    //     status: 'alert-fail',
+    //   };
+    // })
+    // .addCase(fetchDeletePost.fulfilled, (state) => {
+    //   return {
+    //     ...state,
+    //     status: 'alert-success',
+    //   };
+    // });
   },
 });
 

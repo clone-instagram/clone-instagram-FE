@@ -23,7 +23,7 @@ export default function PostList({ posts, isNextPosts }) {
       <ul ref={listRef}>
         {posts.map((post) => (
           <li key={post.id}>
-            <UserInfo postUsername={post.username} postProfileUrl={post.profileUrl} />
+            <UserInfo currPost={post} />
             <div className="post-img">
               <img src={post.imgUrl} />
             </div>

@@ -11,6 +11,9 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const { status, postList, isNextPosts } = useSelector((state) => state.commentReducer);
 
+  // if (status === 'alert-fail') alert('작성자만 삭제/수정할 수 있습니다.');
+  // if (status === 'alert-success') alert('게시글 삭제 성공');
+
   useEffect(() => {
     dispatch(fetchGetPosts());
   }, [dispatch]);
