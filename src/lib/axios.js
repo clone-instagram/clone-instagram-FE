@@ -31,7 +31,7 @@ baseURL.interceptors.request.use((config) => {
 
 // apis
 export const apis = {
-  // 로그인 관련
+  // 로그인 관련1  +
   postLogin: (login) => instance.post("/user/login", login),
   postSignup: (signup) => instance.post("/user/signup", signup),
   // checkEmail: (email) => instance.get(`/user/idCheck/${email}`),

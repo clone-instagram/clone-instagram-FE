@@ -1,15 +1,17 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { fetchGetPosts, fetchAddComment } from '../redux/middleware/thunk';
+import { fetchGetPosts, fetchAddComment } from "../redux/middleware/thunk";
 
-import TopNavBar from '.././components/common/TopNavBar';
-import ExceptionPage from './ExceptionPage';
-import PostList from '.././components/PostList';
+import TopNavBar from ".././components/common/TopNavBar";
+import ExceptionPage from "./ExceptionPage";
+import PostList from ".././components/PostList";
 
 export default function HomePage() {
   const dispatch = useDispatch();
-  const { status, postList, isNextPosts } = useSelector((state) => state.commentReducer);
+  const { status, postList, isNextPosts } = useSelector(
+    (state) => state.commentReducer
+  );
 
   useEffect(() => {
     dispatch(fetchGetPosts());
@@ -17,7 +19,9 @@ export default function HomePage() {
 
   // ToDoAsk 반복됨. 커스텀훅으로 분리해야할지?
   const handleClickPostComment = (postId, content) => {
-    content ? dispatch(fetchAddComment({ id: postId, content })) : alert('댓글을 입력해주세요!');
+    content
+      ? dispatch(fetchAddComment({ id: postId, content }))
+      : alert("댓글을 입력해주세요!");
   };
 
   return (
@@ -27,7 +31,11 @@ export default function HomePage() {
       <>
         <TopNavBar />
         {postList?.length !== 0 ? (
-          <PostList posts={postList} onClickPostComment={handleClickPostComment} isNextPosts={isNextPosts} />
+          <PostList
+            posts={postList}
+            onClickPostComment={handleClickPostComment}
+            isNextPosts={isNextPosts}
+          />
         ) : (
           <></>
         )}
