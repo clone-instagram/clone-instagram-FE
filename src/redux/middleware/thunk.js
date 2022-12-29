@@ -14,10 +14,16 @@ import {
 
 export const fetchGetPosts = createAsyncThunk('india/fetchGetPosts', getPosts);
 
-export const fetchNextPosts = createAsyncThunk('india/fetchNextPosts', async (pageSize) => {
-  const response = await getNextPosts(pageSize);
-  return response.data;
-});
+export const fetchNextPosts = createAsyncThunk(
+  'india/fetchNextPosts',
+  async (pageSize) => {
+    const response = await getNextPosts(pageSize);
+    return response.data;
+  },
+  {
+    condition: (payload, { getState }) => (payload !== getState().comment.currPageSize ? true : false),
+  }
+);
 
 export const fetchGetPost = createAsyncThunk('india/fetchGetPost', async (postId) => {
   const response = await getPost(postId);

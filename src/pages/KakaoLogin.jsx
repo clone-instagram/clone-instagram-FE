@@ -14,13 +14,15 @@ function KakaoLogin() {
         const data = await axios.get(
           `http://${IP}/api/user/kakao/callback?code=${KAKAO_CODE}`
         );
-        console.log("data::", data.data.data.jwtToken);
+        console.log("data::", data.data.data);
 
         localStorage.setItem("id", data.data.data.jwtToken);
+        localStorage.setItem("username", data.data.data.username);
+        localStorage.setItem("profileUrl", data.data.data.profileUrl);
         return data;
       };
 
-      getToken().then(() => window.location.replace("/home"));
+      getToken().then(() => window.location.assign("/home"));
     } catch (err) {
       console.log(err);
     }

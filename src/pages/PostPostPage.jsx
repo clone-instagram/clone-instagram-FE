@@ -8,7 +8,7 @@ import { __addPost } from "../redux/modules/postSlice";
 import white from "../assets/images/white.png";
 // import InputEmojiWithRef from 'react-input-emoji';
 // import EmojiPicker from "emoji-picker-react";
-
+import addimage from "../assets/images/addimage.png";
 // import axios from "axios";
 
 const PostPostPage = () => {
@@ -132,15 +132,25 @@ const PostPostPage = () => {
               });
             }}
           ></StPostBox>
-          <StImogeBox>{/* <InputEmojiWithRef /> */}</StImogeBox>
-          <input
-            type="file"
-            ref={imgRef}
-            // onChange={onChangeImage}
-            onChange={onChangeImage}
-            width="850px"
-            height="850px"
-          ></input>
+          <StImogeBox>
+            <AppStyle>
+              <label htmlFor="ex_file">
+                <div className="addImage">
+                  <img src={addimage} alt="addimage" />
+                </div>
+              </label>
+              <input
+                type="file"
+                accept="image/jpg, image/png, image/jpeg"
+                id="ex_file"
+                ref={imgRef}
+                // onChange={onChangeImage}
+                onChange={onChangeImage}
+                width="850px"
+                height="850px"
+              />
+            </AppStyle>
+          </StImogeBox>
         </StRightBox>
       </form>
     </StContainer>
@@ -264,8 +274,11 @@ const StUserBox = styled.div`
 `;
 
 const StImogeBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 339px;
-  height: 40px;
+  height: 70px;
   border-bottom: 1px solid #dbdbdb;
   border-top: 1px solid #dbdbdb;
 `;
@@ -292,5 +305,30 @@ const StPostBox = styled.textarea`
   }
   &:focus {
     outline: none;
+  }
+`;
+
+const AppStyle = styled.div`
+  margin: 0 8px 0 8px;
+  img {
+    max-width: 50px;
+  }
+  label {
+    margin-top: 10px;
+    display: inline-block;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
   }
 `;

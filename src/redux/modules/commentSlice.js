@@ -5,11 +5,17 @@ import { fetchGetPosts, fetchNextPosts, fetchGetPost } from '../middleware/thunk
 export const comment = createSlice({
   name: 'comment',
   initialState: {
+    isNextPosts: true,
+    currPageSize: 0,
     status: '',
     postList: [],
     currPost: {},
   },
-  reducers: {},
+  reducers: {
+    changeCurrPageSize: (state, { payload }) => {
+      state.currPageSize = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchGetPosts.pending, (state) => {
@@ -60,17 +66,32 @@ export const comment = createSlice({
           currPost: { ...payload },
         };
       })
+      .addCase(fetchNextPosts.pending, (state) => {
+        return {
+          ...state,
+          status: 'loading',
+        };
+      })
+      .addCase(fetchNextPosts.rejected, (state) => {
+        return {
+          ...state,
+          status: 'error',
+        };
+      })
       .addCase(fetchNextPosts.fulfilled, (state, { payload: { postList } }) => {
+        // 상태의 포스트리스트의 길이와 서버데이터의 포스트데이터의 길이가 같지 않으면 true를 할당, 같으면 false를 할당
+        const isNextPosts = state.postList.length !== postList.length;
         return {
           ...state,
           status: 'success',
           postList,
+          isNextPosts,
         };
       });
   },
 });
 
-// export const {  } = comment.actions;
+export const { changeCurrPageSize } = comment.actions;
 
 const commentReducer = comment.reducer;
 export default commentReducer;
