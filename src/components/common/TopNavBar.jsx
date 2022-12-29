@@ -8,13 +8,15 @@ import logo from '../../assets/logo.png';
 import home from '../../assets/solid-icons/home.svg';
 import share from '../../assets/outline-icons/share.svg';
 import add from '../../assets/outline-icons/add.svg';
-import like from '../../assets/outline-icons/like.svg';
+import outline_like from '../.././assets/outline-icons/outline_like.svg';
 import signout from '../../assets/outline-icons/signout.svg';
 
 export default function TopNavBar() {
   const handleClickLogout = () => {
     window.location.assign('/');
     removeItem('id');
+    removeItem('username');
+    removeItem('profileUrl');
   };
 
   return (
@@ -38,7 +40,7 @@ export default function TopNavBar() {
             <img src={add} />
           </Link>
           <Link to="#">
-            <img src={like} />
+            <img src={outline_like} />
           </Link>
           <Link onClick={() => handleClickLogout()}>
             <img src={signout} />

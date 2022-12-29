@@ -6,8 +6,9 @@ import { timeCalculator } from '.././utils/utils';
 
 import { CommentListStyle } from '../styles/CommentListStyle';
 import UserContent from './common/UserContent';
+import CommentUserContent from './common/CommentUserContent';
 
-export default function CommentList({ currPost, onClickPostComment }) {
+export default function CommentList({ currPost }) {
   return (
     <>
       {Object.keys(currPost).length !== 0 ? (
@@ -18,16 +19,16 @@ export default function CommentList({ currPost, onClickPostComment }) {
             </div>
             <div className="content">
               <div>
-                <UserInfo postUsername={currPost.username} postProfileUrl={currPost.profileUrl} />
+                <UserInfo currPost={currPost} />
               </div>
               <div className="scroll-content">
                 <UserContent currPost={currPost} props={0.8} />
                 {currPost.commentResponseList.map((comment) => (
-                  <UserContent key={comment.id} currPost={comment} props={0.8} />
+                  <CommentUserContent currPost={comment} props={0.8} key={comment.id} />
                 ))}
               </div>
               <div>
-                <Icons color="rgba(0, 0, 0, 0.1)" />
+                <Icons post={currPost} color="rgba(0, 0, 0, 0.1)" />
                 <div className="like-count">
                   <div>
                     <span>{`${currPost.likes}명`}</span>
@@ -35,7 +36,7 @@ export default function CommentList({ currPost, onClickPostComment }) {
                   </div>
                   <span className="time">{timeCalculator(currPost.createdAt)}</span>
                 </div>
-                <CommentForm postId={currPost.id} onClickPostComment={onClickPostComment} />
+                <CommentForm postId={currPost.id} />
               </div>
             </div>
           </div>

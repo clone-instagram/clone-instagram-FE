@@ -15,7 +15,7 @@ import loadingGray from '.././assets/loadingGray.json';
 
 import useInfiniteScroll from '../hooks/useInfiniteScroll';
 
-export default function PostList({ posts, onClickPostComment }) {
+export default function PostList({ posts, isNextPosts }) {
   const { listRef } = useInfiniteScroll(posts);
 
   return (
@@ -23,11 +23,11 @@ export default function PostList({ posts, onClickPostComment }) {
       <ul ref={listRef}>
         {posts.map((post) => (
           <li key={post.id}>
-            <UserInfo postUsername={post.username} postProfileUrl={post.profileUrl} />
+            <UserInfo currPost={post} />
             <div className="post-img">
               <img src={post.imgUrl} />
             </div>
-            <Icons postId={post.id} />
+            <Icons post={post} />
             <div className="content">
               <div className="like-count">
                 <span>{`${post.likes}명`}</span>
@@ -41,10 +41,10 @@ export default function PostList({ posts, onClickPostComment }) {
                 <span className="time">{timeCalculator(post.createdAt)}</span>
               </div>
             </div>
-            <CommentForm postId={post.id} onClickPostComment={onClickPostComment} />
+            <CommentForm postId={post.id} />
           </li>
         ))}
-        <Lottie className="loading" animationData={loadingGray} />
+        {isNextPosts ? <Lottie className="loading" animationData={loadingGray} /> : null}
       </ul>
     </PostListStyle>
   );
