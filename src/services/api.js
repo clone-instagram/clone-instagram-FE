@@ -11,7 +11,8 @@ const baseURL = axios.create({
 });
 
 const POSTS = '/api/posts'; // 전체 게시글
-const LIKE = '/api/like/post'; // 단일 게시글
+const LIKE_POST = '/api/like/post'; // 게시물 좋아요
+const LIKE_COMMENT = '/api/like/comment'; // 댓글 좋아요
 
 // 게시글 전체 조회
 export const getPosts = async () => {
@@ -33,7 +34,7 @@ export const getPost = async (postId) => {
 
 // 게시글 좋아요
 export const likePost = async (postId) => {
-  const response = await baseURL.post(LIKE + `/${postId}`);
+  const response = await baseURL.post(LIKE_POST + `/${postId}`);
   return response.data;
 };
 
@@ -41,5 +42,11 @@ export const likePost = async (postId) => {
 export const addComment = async (newComment) => {
   const { id, content } = newComment;
   const response = await baseURL.post(POSTS + `/${id}` + '/comments', { content });
+  return response.data;
+};
+
+// 댓글 좋아요
+export const commentLikePost = async (commentId) => {
+  const response = await baseURL.post(LIKE_COMMENT + `/${commentId}`);
   return response.data;
 };

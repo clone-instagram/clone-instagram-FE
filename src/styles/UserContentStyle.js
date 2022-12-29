@@ -3,9 +3,24 @@ import styled from 'styled-components';
 export const UserContentStyle = styled.div`
   padding: 0 ${(props) => `${props.value}rem`};
   margin: 1rem 0;
-  width: 80%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .like-button {
+    img {
+      border-radius: 8px;
+      padding: 2px;
+      width: 24px;
+      height: 24px;
+      :hover {
+        background-color: #f2f2f2;
+      }
+    }
+  }
   & > div {
     display: flex;
+    width: 80%;
     .time {
       display: block;
       font-size: 10px;
@@ -23,7 +38,7 @@ export const UserContentStyle = styled.div`
           text-overflow: ellipsis;
           margin-right: 4px;
         }
-        button {
+        & > button {
           font-size: 14px;
           color: rgba(0, 0, 0, 0.4);
           background-color: transparent;

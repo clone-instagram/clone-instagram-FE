@@ -6,6 +6,7 @@ import { timeCalculator } from '.././utils/utils';
 
 import { CommentListStyle } from '../styles/CommentListStyle';
 import UserContent from './common/UserContent';
+import CommentUserContent from './common/CommentUserContent';
 
 export default function CommentList({ currPost }) {
   return (
@@ -23,7 +24,7 @@ export default function CommentList({ currPost }) {
               <div className="scroll-content">
                 <UserContent currPost={currPost} props={0.8} />
                 {currPost.commentResponseList.map((comment) => (
-                  <UserContent key={comment.id} currPost={comment} props={0.8} />
+                  <CommentUserContent currPost={comment} props={0.8} key={comment.id} />
                 ))}
               </div>
               <div>
