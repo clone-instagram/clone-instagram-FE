@@ -15,6 +15,8 @@ export default function TopNavBar() {
   const handleClickLogout = () => {
     window.location.assign('/');
     removeItem('id');
+    removeItem('username');
+    removeItem('profileUrl');
   };
 
   return (
