@@ -1,11 +1,9 @@
 import { useState } from 'react';
 
-const initialInputField = [
-  {
-    id: null,
-    content: '',
-  },
-];
+const initialInputField = {
+  id: null,
+  content: '',
+};
 
 export default function useChangeInputField() {
   const [inputField, setInputField] = useState(initialInputField);
@@ -15,11 +13,16 @@ export default function useChangeInputField() {
     const {
       target: { id, value },
     } = event;
-    setInputField([{ id: postId, [id]: value }]);
+    setInputField({ id: postId, [id]: value });
+  };
+
+  const handleClearInputField = (postId) => {
+    setInputField({ id: postId, content: '' });
   };
 
   return {
     inputField,
     handleChangeInputField,
+    handleClearInputField,
   };
 }
