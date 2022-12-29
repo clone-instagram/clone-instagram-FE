@@ -1,14 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { apis } from '../lib/axios';
-import Button from '../components/button/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { __addPost } from '../redux/modules/postSlice';
-import white from '../assets/images/white.png';
+import React, { useState, useRef, useEffect } from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { apis } from "../lib/axios";
+import Button from "../components/button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { __addPost } from "../redux/modules/postSlice";
+import white from "../assets/images/white.png";
 // import InputEmojiWithRef from 'react-input-emoji';
 // import EmojiPicker from "emoji-picker-react";
-
+import addimage from "../assets/images/addimage.png";
 // import axios from "axios";
 
 const PostPostPage = () => {
@@ -16,7 +16,7 @@ const PostPostPage = () => {
 
   const post = useSelector((state) => state.post);
 
-  console.log('posts???', post);
+  console.log("posts???", post);
 
   // const [imageUrl, setImageUrl] = useState(null);
   const imgRef = useRef();
@@ -41,9 +41,9 @@ const PostPostPage = () => {
     };
   };
   // // console.log(imageUrl);
-  const [imagefile, setImageFile] = useState('');
-  const [imgUrl, setImgUrl] = useState('');
-  const [content, setContent] = useState('');
+  const [imagefile, setImageFile] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
+  const [content, setContent] = useState("");
   const [posts, setPosts] = useState([]);
 
   function handleOnEnter(content) {}
@@ -74,15 +74,15 @@ const PostPostPage = () => {
   const onSubmitHandler = () => {
     // console.log(content);
     const formdata = new FormData();
-    formdata.append('file', imagefile);
-    formdata.append('content', content.content);
+    formdata.append("file", imagefile);
+    formdata.append("content", content.content);
     console.log(formdata);
     console.log(typeof formdata);
 
     dispatch(__addPost(formdata));
 
     for (const pair of formdata) {
-      console.log(pair[0] + ', ' + pair[1]);
+      console.log(pair[0] + ", " + pair[1]);
     }
   };
 
@@ -92,7 +92,7 @@ const PostPostPage = () => {
         onSubmit={(e) => {
           e.preventDefault();
           onSubmitHandler(posts);
-          navigate('/home');
+          window.location.assign("/home");
         }}
       >
         <div>
@@ -100,7 +100,7 @@ const PostPostPage = () => {
             <Button
               back
               onClick={() => {
-                navigate('/home');
+                navigate("/home");
               }}
             />
             <StH>새 게시물 만들기</StH>
@@ -110,8 +110,8 @@ const PostPostPage = () => {
         <StLeftBox alt="" src={imgUrl ? imgUrl : white}></StLeftBox>
         <StRightBox>
           <StUserBox>
-            <StProfile src={localStorage.getItem('profileUrl')}></StProfile>
-            <p>{localStorage.getItem('username')}</p>
+            <StProfile src={localStorage.getItem("profileUrl")}></StProfile>
+            <p>{localStorage.getItem("username")}</p>
             {/* <p>{localStorage.getItem("profileUrl")}</p> */}
           </StUserBox>
           <StPostBox
@@ -132,15 +132,25 @@ const PostPostPage = () => {
               });
             }}
           ></StPostBox>
-          <StImogeBox>{/* <InputEmojiWithRef /> */}</StImogeBox>
-          <input
-            type="file"
-            ref={imgRef}
-            // onChange={onChangeImage}
-            onChange={onChangeImage}
-            width="850px"
-            height="850px"
-          ></input>
+          <StImogeBox>
+            <AppStyle>
+              <label htmlFor="ex_file">
+                <div className="addImage">
+                  <img src={addimage} alt="addimage" />
+                </div>
+              </label>
+              <input
+                type="file"
+                accept="image/jpg, image/png, image/jpeg"
+                id="ex_file"
+                ref={imgRef}
+                // onChange={onChangeImage}
+                onChange={onChangeImage}
+                width="850px"
+                height="850px"
+              />
+            </AppStyle>
+          </StImogeBox>
         </StRightBox>
       </form>
     </StContainer>
@@ -264,8 +274,11 @@ const StUserBox = styled.div`
 `;
 
 const StImogeBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 339px;
-  height: 40px;
+  height: 70px;
   border-bottom: 1px solid #dbdbdb;
   border-top: 1px solid #dbdbdb;
 `;
@@ -292,5 +305,30 @@ const StPostBox = styled.textarea`
   }
   &:focus {
     outline: none;
+  }
+`;
+
+const AppStyle = styled.div`
+  margin: 0 8px 0 8px;
+  img {
+    max-width: 50px;
+  }
+  label {
+    margin-top: 10px;
+    display: inline-block;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
   }
 `;

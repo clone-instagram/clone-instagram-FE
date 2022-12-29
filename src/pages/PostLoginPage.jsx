@@ -34,7 +34,7 @@ const PostLoginPage = () => {
       localStorage.setItem("id", res.headers.authorization);
       localStorage.setItem("username", res.data.data.username);
       localStorage.setItem("profileUrl", res.data.data.profileUrl);
-      navigate("/home");
+      window.location.assign("/home");
     });
   };
 

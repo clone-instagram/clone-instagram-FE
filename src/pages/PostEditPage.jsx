@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { __editPost, __getIdPost } from "../redux/modules/postSlice";
 import { useSelector } from "react-redux";
 
+import addimage from "../assets/images/addimage.png";
 // import axios from "axios";
 
 const PostEditPage = () => {
@@ -92,7 +93,7 @@ const PostEditPage = () => {
         onSubmit={(e) => {
           e.preventDefault();
           onEditHandler(Number(param.id), editposts);
-          navigate("/main");
+          window.location.assign("/home");
         }}
       >
         <div>
@@ -100,7 +101,7 @@ const PostEditPage = () => {
             <Button
               back
               onClick={() => {
-                navigate("/main");
+                window.location.assign("/home");
               }}
             />
             <StH>새 게시물 만들기</StH>
@@ -119,7 +120,7 @@ const PostEditPage = () => {
         </div>
         <StRightBox>
           <StUserBox>
-            {/* <img src={localStorage.getItem("profileUrl")}></img> */}
+            <StProfile src={localStorage.getItem("profileUrl")}></StProfile>
             <p>{localStorage.getItem("username")}</p>
             {/* <p>{localStorage.getItem("profileUrl")}</p> */}
           </StUserBox>
@@ -142,15 +143,25 @@ const PostEditPage = () => {
               });
             }}
           ></StPostBox>
-          <StImogeBox></StImogeBox>
-          <input
-            type="file"
-            ref={imgRef}
-            // onChange={onChangeImage}
-            onChange={onChangeImage}
-            width="850px"
-            height="850px"
-          ></input>
+          <StImogeBox>
+            <AppStyle>
+              <label htmlFor="ex_file">
+                <div className="addImage">
+                  <img src={addimage} alt="addimage" />
+                </div>
+              </label>
+              <input
+                type="file"
+                accept="image/jpg, image/png, image/jpeg"
+                id="ex_file"
+                ref={imgRef}
+                // onChange={onChangeImage}
+                onChange={onChangeImage}
+                width="850px"
+                height="850px"
+              />
+            </AppStyle>
+          </StImogeBox>
         </StRightBox>
       </form>
     </StContainer>
@@ -255,6 +266,31 @@ const StRightBox = styled.div`
 //   cursor: pointer;
 // `;
 
+const AppStyle = styled.div`
+  margin: 0 8px 0 8px;
+  img {
+    max-width: 50px;
+  }
+  label {
+    margin-top: 10px;
+    display: inline-block;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+`;
+
 const StH = styled.h3`
   color: black;
   text-align: center;
@@ -274,8 +310,11 @@ const StUserBox = styled.div`
 `;
 
 const StImogeBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 339px;
-  height: 40px;
+  height: 70px;
   border-bottom: 1px solid #dbdbdb;
   border-top: 1px solid #dbdbdb;
 `;
@@ -295,4 +334,12 @@ const StPostBox = styled.textarea`
   &:focus {
     outline: none;
   }
+`;
+
+const StProfile = styled.img`
+  margin-right: 12px;
+  width: 35px;
+  height: 35px;
+  border-radius: 30px;
+  background-color: pink;
 `;
