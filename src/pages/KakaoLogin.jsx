@@ -22,6 +22,7 @@ function KakaoLogin() {
         return data;
       };
 
+      ////토큰수정////
       getToken().then(() => window.location.assign("/home"));
     } catch (err) {
       console.log(err);
