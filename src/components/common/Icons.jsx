@@ -1,20 +1,38 @@
 import { Link } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+
+import { fetchLikePost } from '../../redux/middleware/thunk';
+
 import { IconsStyle } from '../../styles/IconsStyle';
 
-import like from '../.././assets/outline-icons/like.svg';
+import outline_like from '../.././assets/outline-icons/outline_like.svg';
+import solid_like from '../.././assets/solid-icons/solid_like.svg';
 import comment from '../.././assets/outline-icons/comment.svg';
 import share from '../.././assets/outline-icons/share.svg';
-import bookmark from '../.././assets/outline-icons/bookmark.svg';
+import outline_bookmark from '../.././assets/outline-icons/outline_bookmark.svg';
 
-export default function Icons({ postId, color }) {
+export default function Icons({ post, color }) {
+  const dispatch = useDispatch();
+
+  const handleClickIcon = (postId, iconContent) => {
+    iconContent === 'like' ? dispatch(fetchLikePost(postId)) : null;
+    // iconContent === 'bookmark' ? dispatch(clickBookMark(postId)) : null;
+  };
+
   return (
     <IconsStyle color={color}>
       <div className="left-icons">
-        <button type="button">
-          <img src={like} />
-        </button>
-        <Link to={`/comment/${postId}`}>
+        {!post.like ? (
+          <button type="button" onClick={() => handleClickIcon(post.id, 'like')}>
+            <img src={outline_like} />
+          </button>
+        ) : (
+          <button type="button" onClick={() => handleClickIcon(post.id, 'like')}>
+            <img src={solid_like} />
+          </button>
+        )}
+        <Link to={`/comment/${post.id}`}>
           <img src={comment} />
         </Link>
         <Link to="#">
@@ -22,9 +40,9 @@ export default function Icons({ postId, color }) {
         </Link>
       </div>
       <div className="right-icons">
-        <Link to="#">
-          <img src={bookmark} />
-        </Link>
+        <button type="button" onClick={() => handleClickIcon(post.id, 'bookmark')}>
+          <img src={outline_bookmark} />
+        </button>
       </div>
     </IconsStyle>
   );

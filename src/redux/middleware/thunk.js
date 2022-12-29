@@ -20,9 +20,9 @@ export const fetchGetPost = createAsyncThunk('india/fetchGetPost', async (postId
   return response.data;
 });
 
-export const fetchLikePost = createAsyncThunk('india/fetchLikePost', async (postId) => {
-  const response = await likePost(postId);
-  return response.data;
+export const fetchLikePost = createAsyncThunk('india/fetchLikePost', async (postId, thunkAPI) => {
+  await likePost(postId);
+  thunkAPI.dispatch(fetchGetPosts());
 });
 
 export const fetchAddComment = createAsyncThunk('india/fetchAddComment', async (newComment, thunkAPI) => {
