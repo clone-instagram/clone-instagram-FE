@@ -51,7 +51,7 @@ const PostSignUpPage = () => {
       //   alert(res.data.msg);
       // }
       // localStorage.setItem("id", res.headers.authorization);
-      navigate("/login");
+      navigate("/");
     });
     // .catch((err) => {
     //   // console.log("error: ", err);
