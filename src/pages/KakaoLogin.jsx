@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { redirect, useLocation, useNavigate } from "react-router-dom";
 function KakaoLogin() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -15,7 +15,6 @@ function KakaoLogin() {
           `http://${IP}/api/user/kakao/callback?code=${KAKAO_CODE}`
         );
         console.log("data::", data.data.data);
-
         localStorage.setItem("id", data.data.data.jwtToken);
         localStorage.setItem("username", data.data.data.username);
         localStorage.setItem("profileUrl", data.data.data.profileUrl);
